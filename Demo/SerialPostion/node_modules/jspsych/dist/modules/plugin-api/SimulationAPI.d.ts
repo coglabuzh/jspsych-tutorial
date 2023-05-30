@@ -1,0 +1,41 @@
+export declare class SimulationAPI {
+    dispatchEvent(event: Event): void;
+    /**
+     * Dispatches a `keydown` event for the specified key
+     * @param key Character code (`.key` property) for the key to press.
+     */
+    keyDown(key: string): void;
+    /**
+     * Dispatches a `keyup` event for the specified key
+     * @param key Character code (`.key` property) for the key to press.
+     */
+    keyUp(key: string): void;
+    /**
+     * Dispatches a `keydown` and `keyup` event in sequence to simulate pressing a key.
+     * @param key Character code (`.key` property) for the key to press.
+     * @param delay Length of time to wait (ms) before executing action
+     */
+    pressKey(key: string, delay?: number): void;
+    /**
+     * Dispatches `mousedown`, `mouseup`, and `click` events on the target element
+     * @param target The element to click
+     * @param delay Length of time to wait (ms) before executing action
+     */
+    clickTarget(target: Element, delay?: number): void;
+    /**
+     * Sets the value of a target text input
+     * @param target A text input element to fill in
+     * @param text Text to input
+     * @param delay Length of time to wait (ms) before executing action
+     */
+    fillTextInput(target: HTMLInputElement, text: string, delay?: number): void;
+    /**
+     * Picks a valid key from `choices`, taking into account jsPsych-specific
+     * identifiers like "NO_KEYS" and "ALL_KEYS".
+     * @param choices Which keys are valid.
+     * @returns A key selected at random from the valid keys.
+     */
+    getValidKey(choices: "NO_KEYS" | "ALL_KEYS" | Array<string> | Array<Array<string>>): any;
+    mergeSimulationData(default_data: any, simulation_options: any): any;
+    ensureSimulationDataConsistency(trial: any, data: any): void;
+}
