@@ -18,7 +18,7 @@ export function control_browser_interactions(code: string = "FailedAttention") {
             varGlobal.n_blur++;
         }
 
-        if (varGlobal.n_blur < varGlobal.max_blur && varGlobal.n_blur > 0) {
+        if (varGlobal.n_blur < varGlobal.max_blur && varGlobal.n_blur >= 0) {
 
             jsPsych.pauseExperiment();
             
@@ -26,13 +26,12 @@ export function control_browser_interactions(code: string = "FailedAttention") {
             Swal.fire({
                 icon: "warning",
                 title: "Warning",
-                text: `You have left the window tab ${varGlobal.n_blur} time(s). 
-                When you leave it two more time, 
-                you will be kicked out of the study `,
-                showConfirmButton: true
-            })
-
-            jsPsych.resumeExperiment();
+                text: `You have left the window tab ${varGlobal.n_blur} time(s).
+                 When you leave it two more times, you will be kicked out of the study.`,
+                showConfirmButton: true,
+            }).then(() => {
+                jsPsych.resumeExperiment();
+            });
 
         } else {
 
