@@ -7,13 +7,20 @@ import { sequence } from "../BasicFun/sequence";
  * @param {string} condition - The condition to generate the stimulus array for.
  * @returns {Object} An object containing the stimulus array and the positions to be removed (if applicable).
  */
-export const generateStims = function(setsize: number = 6, nBox:number = 8) {
+export const generateStims = function(setsize: number = 6, nBox:number = 8, stim = "letter") {
+
+  var stim_pool:string[] = [];
 
     // Create an array of the English alphabet.
-    const alphabet_array = sequence.alphabet();
+    if (stim=="letter") var stim_pool = sequence.alphabet();
+    if (stim=="image") {
+      for (let i = 1; i < 12; i++) {
+        stim_pool.push(`assets/Images/Stimuli/Image${i}.jpg`);
+      };
+    } 
   
     // Sample setsize random elements from alphabet_array and store them in stim_array.
-    var stim_array = random.sample(alphabet_array, nBox);
+    var stim_array = random.sample(stim_pool, nBox);
   
     // If the "keeping6" condition is specified, replace two items in the initial five positions with the "#" character.
     if (setsize < 8) {

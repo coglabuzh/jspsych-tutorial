@@ -1,7 +1,7 @@
 /**
- * @title Removal-23-2
- * @description This experiment aims to explore the benefits of removal.
- * @version 0.1.0
+ * @title Serial position recall task
+ * @description This is a demo experiment based on the position recall task. 
+ * @version 0.1.1
  *
  * @assets assets/
  */
@@ -12,8 +12,8 @@ import "../styles/main.scss";
 
 
 // import plugins from jspsych
-import fullscreen from '@jspsych/plugin-fullscreen';
-import PreloadPlugin from "@jspsych/plugin-preload";
+import preload from '@jspsych/plugin-preload';
+
 
 // import setting
 import { expInfo, jsPsych } from "./setting";
@@ -21,10 +21,12 @@ import { expInfo, jsPsych } from "./setting";
 // import screens and lines
 import { welcome_screen } from "./Instruction/welcome";
 import { consent_screen, notice_screen } from "./Instruction/consent";
+import { fullMode_screen } from "./Instruction/funScreen";
 import { exp_instr_screen, pra_instr_screen, createBlockBreak} from "./Instruction/InstrTrial";
 import { random } from "./BasicFun/random";
 import { chunkTrials } from "./BasicFun/chunkTrials";
 import { createNewTrial } from "./Trials/trialProcess";
+import { createInstr } from "./Instruction/InstrStart";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -35,19 +37,18 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   var timeline:any[] = [];
 
+
   // Preload assets
   const preload_screen = {
-    type: PreloadPlugin,
-    images: assetPaths.images,
-    audio: assetPaths.audio,
-    video: assetPaths.video,
+    type: preload,
+    images: assetPaths.Images,
+    // audio: assetPaths.audio,
+    // video: assetPaths.video,
   };
 
-  // Switch to fullscreen
-  const fullMode_screen = {
-    type: fullscreen,
-    fullscreen_mode: true,
-  }
+
+  // Instruction
+  const instr_line = createInstr(4)
 
 
   /************************************** Experiment **************************************/
@@ -85,17 +86,20 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   };
 
 
+  /************************************** Procedure **************************************/
+
   // Push all the screen slides into timeline
-  // timeline.push(preload_screen);
+  timeline.push(preload_screen);
   timeline.push(welcome_screen);
   timeline.push(consent_screen);
-  // timeline.push(notice_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(notice_screen);
+  timeline = timeline.concat(instr_line);
+  timeline.push(fullMode_screen);
   timeline = timeline.concat(exp_line);
 
   await jsPsych.run(timeline);
 
   // Return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
   // if you handle results yourself, be it here or in `on_finish()`)
-  return jsPsych;
+  // return jsPsych;
 }

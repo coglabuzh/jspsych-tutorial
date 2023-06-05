@@ -8,15 +8,18 @@ import { check_consent, check_notice } from '../TaskFun/checkFun';
 /* informed consent */
 export const consent_screen = {
 type: externalHtml,
-url: "../assets/ExternalHtml/Information.html",
+url: "assets/ExternalHtml/Information.html",
 cont_btn: "agree",
 check_fn: check_consent
 };
 
-/* Notice */
+
+/**
+ *  A notice screen, including several items that participants need to be noticed if they do the experiment online.
+ */
 export const notice_screen = {
 type: externalHtml,
-url: "../assets/ExternalHtml/Notice.html",
+url: "assets/ExternalHtml/Notice.html",
 cont_btn: "ready",
 check_fn: check_notice
 };
