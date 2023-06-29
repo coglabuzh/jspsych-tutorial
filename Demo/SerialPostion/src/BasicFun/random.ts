@@ -15,7 +15,7 @@ export const random = {
    * @param end 
    * @returns a random integer in the given range
    */
-  randint: function (start, end) {
+  randint: function (start: number, end: number): number {
     return start + Math.floor(Math.random() * (end - start)); // Returns a random integer between start (inclusive) and end (exclusive)
   },
 

@@ -68,8 +68,9 @@ class trialStim {
 
 
 
-/**
- * A function used to display items in sequence.
+/** A function used to display items in sequence.
+ * 
+ * @returns {Object} An object containing the screens to be presented.
  */
 trialStim.prototype.memoryPhase = function () {
 
@@ -122,8 +123,9 @@ trialStim.prototype.memoryPhase = function () {
   return phase_line;
 };
 
-/**
+/** Ask participants to recall the items.
  * 
+ * @returns {Object} An object containing the screens to be presented.
  */
 trialStim.prototype.retrievalPhase = function () {
 
@@ -186,9 +188,10 @@ trialStim.prototype.retrievalPhase = function () {
 };
 
 
-/**
- * This function will display a retrieval screen and prompt participants to choose the correct response from a matrix of alternatives.
- * In general, `data.response` refers to the index of the response in the `alter_array`. We utilized the `on_finish` function to convert it into an item.
+/** This function will display a retrieval screen and prompt participants 
+ * to choose the correct response from a matrix of alternatives.
+ * In general, `data.response` refers to the index of the response in the `alter_array`. 
+ * We utilized the `on_finish` function to convert it into an item.
  * 
  */
 trialStim.prototype.retrievalPhase2 = function () {
@@ -288,7 +291,7 @@ trialStim.prototype.debriefPhase = function () {
  * @param trialID the number of the trial ID
  * @returns 
  */
-export function createNewTrial(setsize, nBox = 8, procedure = 'Experiment', blockID = 0, trialID = 0) {
+export function createNewTrial(setsize: number, nBox: number = 8, procedure: string = 'Experiment', blockID: number = 0, trialID: number = 0): string[] {
 
   var trial_line: any[] = [];
   // create a trial object
