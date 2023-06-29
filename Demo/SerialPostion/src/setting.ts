@@ -24,11 +24,12 @@ export const jsPsych = initJsPsych({
 export const expInfo = {
     nExpTrials: 1, // number of experiment trials for each condition
     nBlock: 1, // number of blocks
-    conditionList: [4, 5, 6, 7, 8]
+    conditionList: [4, 5, 6, 7, 8],
+    presentationTime: 1000
 }
 
 export const varGlobal = {
-    start_count: false, // 
+    start_count: true, // 
     pause: false,
     n_blur: 0, // use to count how many times participants left the browser
     max_blur: 3,

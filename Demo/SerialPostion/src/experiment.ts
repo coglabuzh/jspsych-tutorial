@@ -9,11 +9,8 @@
 // You can import stylesheets (.scss or .css).
 import "../styles/main.scss";
 
-
-
 // import plugins from jspsych
 import preload from '@jspsych/plugin-preload';
-
 
 // import setting
 import { expInfo, jsPsych } from "./setting";

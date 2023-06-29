@@ -272,7 +272,7 @@ export function createNewTrial(setsize, nBox = 8, procedure = 'Experiment', bloc
   var memory_phase = trial_body.memoryPhase();
   trial_line = trial_line.concat(memory_phase);
   // retrieval phase
-  var retrieval_phase = trial_body.retrievalPhase2();
+  var retrieval_phase = trial_body.retrievalPhase();
   trial_line = trial_line.concat(retrieval_phase);
   // debrief phase
   var debrief_phase = trial_body.debriefPhase();

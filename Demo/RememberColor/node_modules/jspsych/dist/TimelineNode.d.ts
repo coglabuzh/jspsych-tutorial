@@ -1,0 +1,34 @@
+import { JsPsych } from "./JsPsych";
+export declare class TimelineNode {
+    private jsPsych;
+    relative_id: any;
+    parent_node: any;
+    trial_parameters: any;
+    timeline_parameters: any;
+    node_trial_data: any;
+    progress: any;
+    end_message?: string;
+    constructor(jsPsych: JsPsych, parameters: any, parent?: any, relativeID?: any);
+    trial(): any;
+    markCurrentTrialComplete(): void;
+    nextRepetiton(): void;
+    setTimelineVariablesOrder(): void;
+    nextSet(): void;
+    advance(): any;
+    isComplete(): any;
+    getTimelineVariableValue(variable_name: string): any;
+    findTimelineVariable(variable_name: any): any;
+    timelineVariable(variable_name: string): any;
+    allTimelineVariables(): any;
+    allTimelineVariablesNames(so_far?: any[]): any;
+    length(): number;
+    percentComplete(): number;
+    reset(): void;
+    end(): void;
+    endActiveNode(): void;
+    ID(): string;
+    activeID(): any;
+    generatedData(): import("./modules/data/DataCollection").DataCollection;
+    trialsOfType(type: any): any;
+    insert(parameters: any): void;
+}
