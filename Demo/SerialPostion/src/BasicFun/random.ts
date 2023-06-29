@@ -1,14 +1,16 @@
 
 export const random = {
-  /**
+
+  /** This function generate a random floating-point number between 0 (inclusive) and 1 (exclusive)
    * 
    * @returns a random number between 0 and 1
    */
   random: function () {
     return Math.random(); // Returns a random floating-point number between 0 (inclusive) and 1 (exclusive)
   },
-  /**
-   * generates a random integer in the given range
+
+  /** This function generates a random integer within the specified range.
+   * 
    * @param start 
    * @param end 
    * @returns a random integer in the given range
@@ -16,29 +18,25 @@ export const random = {
   randint: function (start, end) {
     return start + Math.floor(Math.random() * (end - start)); // Returns a random integer between start (inclusive) and end (exclusive)
   },
-  /**
-   * shuffle the given array
+
+  /** shuffle the given array, support any type of array
+   * 
    * @param array 
    * @returns an array
    */
-  shuffle: function (array) {
-    let currentIndex = array.length,
-      randomIndex;
-  
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex); // Generate a random index within the range of the remaining elements
-      currentIndex--;
-      
-      // Swap the current element with the element at the random index
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
+  shuffle: function <T>(array: T[]) { 
+    // Iterate through the array backwards
+    for (let i = array.length - 1; i > 0; i--) { 
+      // Generate a random number between 0 and the current index
+      const j = Math.floor(Math.random() * (i + 1)); 
+      // Swap the current item with the randomly chosen one
+      [array[i], array[j]] = [array[j], array[i]]; 
     }
-  
-    return array; // Return the shuffled array
+    // Return the shuffled array
+    return array; 
   },
-  /**
+
+  /** Sample a specified number of elements from an array, allowing for either repeated or non-repeated sampling.
    * 
    * @param arr 
    * @param num  The sample size.
@@ -49,18 +47,27 @@ export const random = {
     const result: T[] = [];
     const new_arr: T[] = Array.from(arr);
   
+    // If repeat is false, sample without repetition
     if (!repeat) {
+      // Repeat num times
       for (let i = 0; i < num; i++) {
+        // Randomly generate a number between 0 and new_arr.length - 1
         const ran = Math.floor(Math.random() * new_arr.length);
-        result.push(new_arr.splice(ran, 1)[0]); // Remove and add a random element from new_arr to the result array (without repetition)
+        // Add the element at index ran of new_arr to the result array
+        result.push(new_arr.splice(ran, 1)[0]);
+        // Remove the element at index ran from new_arr
       }
     } else {
+      // Repeat num times
       for (let i = 0; i < num; i++) {
+        // Randomly generate a number between 0 and arr.length - 1
         const ran = Math.floor(Math.random() * arr.length);
-        result.push(arr[ran]); // Add a random element from arr to the result array (with repetition)
+        // Add the element at index ran of arr to the result array
+        result.push(arr[ran]);
       }
     }
   
-    return result; // Return the sampled elements array
+    // Return the sampled elements array
+    return result;
   }
 };
