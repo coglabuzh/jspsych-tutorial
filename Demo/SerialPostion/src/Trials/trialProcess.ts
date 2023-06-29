@@ -12,32 +12,60 @@ import { createButtonMatrix } from "../TaskFun/setCSS";
 
 /**
  * This function creates a main object that will be displayed on the screen.
- * @param {string} condition 
  * @param {number} num The number of item boxes to generate.
  * @param {string} procedure The name of the current procedure
  * @param {number} blockID The number of the current block
  * @param {number} trialID The number of the current trial
  * @param {logical} special A logical object. If true, a fixed alphabet-array would be used.
  */
-function trialStim(setsize, nBox = 8, procedure = 'experiment', blockID = 0, trialID = 0) {
+class trialStim {
 
-  // These variables define parameters of the stimuli object.
-  this.nBox = nBox; // Number of boxes
-  this.setsize = setsize; // Number of stimulus
-  this.procedure = procedure; // Procedure type
-  this.block = blockID; // Block ID
-  this.trial = trialID; // Trial ID
+  nBox: number; // Number of boxes
+  setsize: number; // Number of stimulus
+  procedure: string; // Procedure type
+  block: number; // Block ID
+  trial: number; // Trial ID
+  stim: any[]; // Array of stimulus objects
+  canW: number; // Width of the canvas
+  canH: number; // Height of the canvas
+  center: number[]; // Center position of the stimuli object
+  radius: number; // Radius of the stimuli object
+  width: number; // Width of each stimulus
 
-  // This creates an array with the correct answers. "#" represents a removed stimulus.
-  this.stim = generateStims(setsize);
+  constructor(setsize: number, nBox: number = 8, procedure: string = 'experiment', blockID: number = 0, trialID: number = 0) {
+    // These variables define parameters of the stimuli object.
+    this.nBox = nBox;
+    this.setsize = setsize;
+    this.procedure = procedure;
+    this.block = blockID;
+    this.trial = trialID;
 
-  // These variables define the size and position of the stimuli object on the screen.
-  this.canW = Math.min(screen.width, screen.height / 9 * 16) * 0.9; // Width of the canvas
-  this.canH = this.canW * 0.5; // Height of the canvas
-  this.center = [this.canW / 2, this.canH / 2]; // Center position of the stimuli object
-  this.radius = this.canH * 0.33; // Radius of the stimuli object
-  this.width = this.canH * 0.175; // Width of each stimulus
+    // This creates an array with the correct answers. "#" represents a removed stimulus.
+    this.stim = generateStims(setsize);
+
+    // These variables define the size and position of the stimuli object on the screen.
+    this.canW = Math.min(screen.width, screen.height / 9 * 16) * 0.9;
+    this.canH = this.canW * 0.5;
+    this.center = [this.canW / 2, this.canH / 2];
+    this.radius = this.canH * 0.33;
+    this.width = this.canH * 0.175;
+  }
+
+  // A function used to display items in sequence.
+  memoryPhase() {}
+
+  // Ask participants to recall the items.
+  retrievalPhase() {}
+
+  // Ask participants to select correct option from the alternative matrix.
+  retrievalPhase2() {}
+
+  // return a feedback screen to participants.
+  debriefPhase() {}
+  
 }
+
+
 
 
 /**
@@ -80,7 +108,6 @@ trialStim.prototype.memoryPhase = function () {
         blockID: this.block,
         trialID: this.trial,
         stepID: pos + 1,
-        condition: this.condition,
         setsize: this.setsize,
         position: pos,
         initial_item: this.stim[pos]
