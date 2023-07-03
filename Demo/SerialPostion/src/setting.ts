@@ -29,7 +29,7 @@ export const expInfo = {
 }
 
 export const varGlobal = {
-    start_count: true, // 
+    start_count: false, // 
     pause: false,
     n_blur: 0, // use to count how many times participants left the browser
     max_blur: 3,
