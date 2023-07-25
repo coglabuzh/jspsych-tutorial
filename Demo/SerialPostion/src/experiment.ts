@@ -6,24 +6,24 @@
  * @assets assets/
  */
 
-// You can import stylesheets (.scss or .css).
+// import stylesheets (.scss or .css).
 import "../styles/main.scss";
 
 // import plugins from jspsych
 import preload from '@jspsych/plugin-preload';
 
 // import setting
-import { expInfo, jsPsych } from "./setting";
+import { expInfo, jsPsych } from "./settings";
 
-// import screens and lines
-import { welcome_screen } from "./Instruction/welcome";
-import { consent_screen, notice_screen } from "./Instruction/consent";
-import { fullMode_screen } from "./Instruction/funScreen";
-import { exp_instr_screen, pra_instr_screen, createBlockBreak} from "./Instruction/InstrTrial";
-import { random } from "./BasicFun/random";
-import { chunkTrials } from "./BasicFun/chunkTrials";
-import { createNewTrial } from "./Trials/trialProcess";
-import { createInstr } from "./Instruction/InstrStart";
+// import custom functions and screens
+import { welcome_screen } from "./instructions/welcome";
+import { consent_screen, notice_screen } from "./instructions/consent";
+import { fullMode_screen } from "./instructions/funScreen";
+import { exp_instr_screen, pra_instr_screen, createBlockBreak} from "./instructions/InstrTrial";
+import { random } from "./basic-fun/random";
+import { chunkTrials } from "./basic-fun/chunkTrials";
+import { createNewTrial } from "./trials/trialProcess";
+import { createInstr } from "./instructions/InstrStart";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -32,21 +32,19 @@ import { createInstr } from "./Instruction/InstrStart";
  */
 export async function run({ assetPaths, input = {}, environment, title, version }) {
 
-  var timeline:any[] = [];
-
+  // Initialize a timeline to hold the trials
+  var timeline: any[] = [];
 
   // Preload assets
   const preload_screen = {
     type: preload,
-    images: assetPaths.Images,
+    images: assetPaths.images,
     // audio: assetPaths.audio,
     // video: assetPaths.video,
   };
 
-
   // Instruction
   const instr_line = createInstr(4)
-
 
   /************************************** Experiment **************************************/
 
@@ -84,12 +82,18 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
 
   /************************************** Procedure **************************************/
+ 
+  // TODO HANNAH: alters participant if they try to resize the window
+  // addEventListener("resize", (event) => { alert("don't resize")});
 
   // Push all the screen slides into timeline
+  // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
   timeline.push(consent_screen);
   timeline.push(notice_screen);
+
+  
   timeline = timeline.concat(instr_line);
   timeline.push(fullMode_screen);
   timeline = timeline.concat(exp_line);

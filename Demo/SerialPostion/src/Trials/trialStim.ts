@@ -1,6 +1,6 @@
 
-import {random} from "../BasicFun/random"
-import { sequence } from "../BasicFun/sequence";
+import { random } from "../basic-fun/random"
+import { sequence } from "../basic-fun/sequence";
 
 /**
  * Generates a stimulus array based on the specified condition.

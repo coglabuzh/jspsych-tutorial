@@ -1,13 +1,16 @@
-import psychophysics from "../BasicFun/Psychophysics"
+import psychophysics from "../basic-fun/Psychophysics"
+import { random } from "../basic-fun/random";
+import { getIndex } from "../basic-fun/getIndex";
+import { createButtonMatrix } from "../task-fun/setCSS";
+
 import { generateStims } from "./trialStim";
 import { stimBoxes } from "./elements";
-import { random } from "../BasicFun/random";
-import { jsPsych } from "../setting";
-import { getIndex } from "../BasicFun/getIndex";
+
+import { jsPsych } from "../settings";
 import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
-import { sequence } from "../BasicFun/sequence";
-import { trial_start_screen } from "../Instruction/InstrTrial";
-import { createButtonMatrix } from "../TaskFun/setCSS";
+import { sequence } from "../basic-fun/sequence";
+import { trial_start_screen } from "../instructions/InstrTrial";
+
 
 
 /**

@@ -10,12 +10,12 @@
 import "../styles/main.scss";
 
 // import setting
-import { expInfo, jsPsych } from "./setting";
+import { expInfo, jsPsych } from "./settings";
 
 // import screens and lines
-import { welcome_screen } from "./Instruction/welcome";
-import psychophysics from "./BasicFun/Psychophysics"
-import { drawColorWheel } from "./BasicFun/colorWheel"
+import { welcome_screen } from "./instructions/welcome";
+import psychophysics from "./basic-fun/Psychophysics"
+import { drawColorWheel } from "./basic-fun/colorWheel"
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
