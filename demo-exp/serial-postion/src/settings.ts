@@ -31,8 +31,12 @@ export const expInfo = {
     nBoxes: 8, // number of boxes
     conditionList: [4, 5, 6, 7, 8],
     presentationTime: 1000, // presentation time of each stimulus
+    ISI: 500, // inter-stimulus interval
+    wordPlusISI: 1000+500, // time between two stimuli = ISI + presentation time
 
-    breakDuration: 30 // break duration
+    breakDuration: 30, // break duration
+    retrievalTime: 20 * 1000, // time for retrieval
+    debriefTime: 2000 // time for feedback
 
 
 }

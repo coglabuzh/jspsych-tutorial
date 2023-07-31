@@ -6,7 +6,7 @@ import { createButtonMatrix } from "../task-fun/setCSS";
 import { generateStims } from "./trialStim";
 import { stimBoxes } from "./elements";
 
-import { jsPsych } from "../settings";
+import { expInfo, jsPsych } from "../settings";
 import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
 import { sequence } from "../basic-fun/sequence";
 import { trial_start_screen } from "../instructions/InstrTrial";
@@ -91,10 +91,10 @@ trialStim.prototype.memoryPhase = function () {
 
     // Create a new instance of the "stimBoxes" class
     var letter_boxes = stimBoxes(this.nBox, content, [], this.center, this.width, this.radius)
-
+    console.log(letter_boxes);
     // Set the start time and end time for the presentation of the letter at the current position in the "letter_boxes" array.
-    letter_boxes[pos + 1].show_start_time = 500;
-    letter_boxes[pos + 1].show_end_time = 1500;
+    letter_boxes[pos + 1].show_start_time =  expInfo.ISI;
+    letter_boxes[pos + 1].show_end_time = expInfo.wordPlusISI;
 
     // Define a new object called "stim_screen" with various properties
     let stim_screen = {
@@ -105,7 +105,7 @@ trialStim.prototype.memoryPhase = function () {
       stimuli: letter_boxes,
       response_type: 'key',
       choices: 'NO_KEYS',
-      trial_duration: 1500,
+      trial_duration: expInfo.wordPlusISI,
       data: {
         screenID: 'memory',
         expPart: this.expPart,
@@ -152,7 +152,7 @@ trialStim.prototype.retrievalPhase = function () {
       canvas_height: this.canH,
       stimuli: boxes,
       response_type: 'key',
-      trial_duration: 20 * 1000,
+      trial_duration: expInfo.retrievalTime,
       choices: ['Enter'],
       key_down_func: function (event) {
         let key = event.key;
@@ -232,7 +232,7 @@ trialStim.prototype.retrievalPhase2 = function () {
       canvas_height: this.canH,
       stimuli: boxes,
       response_type: 'button',
-      trial_duration: 20 * 1000,
+      trial_duration: expInfo.retrievalTime,
       button_choices: alter_array,
       button_html: buttonCSS,
       data: {
@@ -267,7 +267,7 @@ trialStim.prototype.debriefPhase = function () {
 
   var display_screen = {
     type: htmlKeyboardResponse,
-    trial_duration: 2000,
+    trial_duration: expInfo.debriefTime,
     stimulus: function () {
       var accuracy = jsPsych.data.get().last(nTest + 1).filter({ screenID: "retrieval", acc: true }).count();
       return `<div class='fb-text'>You correctly recalled ${accuracy} out of ${nTest} letters.</div>`;
