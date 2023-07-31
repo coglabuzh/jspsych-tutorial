@@ -3,7 +3,7 @@ import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
 import { countdownTimer } from '../basic-fun/countdownTimer';
 import { varGlobal } from '../settings';
 
-export const exp_instr_screen = {
+export const exp_start_screen = {
     type: htmlButtonResponse,
     stimulus:
       `<div class='main'>

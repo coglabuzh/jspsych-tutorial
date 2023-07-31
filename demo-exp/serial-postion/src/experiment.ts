@@ -19,7 +19,7 @@ import { expInfo, jsPsych } from "./settings";
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { fullMode_screen } from "./instructions/funScreen";
-import { exp_instr_screen, pra_instr_screen, createBlockBreak} from "./instructions/InstrTrial";
+import { exp_start_screen, pra_instr_screen, createBlockBreak} from "./instructions/InstrTrial";
 import { random } from "./basic-fun/random";
 import { chunkTrials } from "./basic-fun/chunkTrials";
 import { createNewTrial } from "./trials/trialProcess";
@@ -55,13 +55,15 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   
   // randomize the order of trials (shuffle the list - Fisher-Yates algorithm)
   random.shuffle(exp_trials);
-  // chunk trials into blocks
+
+  // chunk trials into blocks: divide the experimental list into nBlock chunks
   const exp_chunks = chunkTrials(exp_trials, expInfo.nBlock);
 
+  //declare the list that will hold the instructions and trials
   let exp_line:any[] = [];
 
-  // push instructions
-  exp_line.push(exp_instr_screen);
+  // push alter to begin the main phase of the experiment into the list
+  exp_line.push(exp_start_screen);
 
   // Block
   for (var [block, block_trials] of exp_chunks.entries()) {
