@@ -3,7 +3,9 @@ import { jsPsych, varGlobal } from "../settings";
 import Swal from 'sweetalert2';
 
 /**
- * 
+ * Function to control whether participants leave the browser or not
+ * @param code: the code for the attention check
+ * @param alert: whether to show the warning information or not
  */
 export function control_browser_interactions(code: string = "FailedAttention", alert = true) {
 

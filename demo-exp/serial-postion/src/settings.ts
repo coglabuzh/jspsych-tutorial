@@ -34,6 +34,8 @@ export const expInfo = {
     ISI: 500, // inter-stimulus interval
     wordPlusISI: 1000+500, // time between two stimuli = ISI + presentation time
 
+    startDuration: 10 * 1000, // time for the countdown before a new trial starts
+    ITI: 1000, // inter-trial interval
     breakDuration: 30, // break duration
     retrievalTime: 20 * 1000, // time for retrieval
     debriefTime: 2000 // time for feedback

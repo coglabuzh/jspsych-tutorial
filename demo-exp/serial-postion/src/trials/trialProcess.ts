@@ -91,7 +91,7 @@ trialStim.prototype.memoryPhase = function () {
 
     // Create a new instance of the "stimBoxes" class
     var letter_boxes = stimBoxes(this.nBox, content, [], this.center, this.width, this.radius)
-    console.log(letter_boxes);
+
     // Set the start time and end time for the presentation of the letter at the current position in the "letter_boxes" array.
     letter_boxes[pos + 1].show_start_time =  expInfo.ISI;
     letter_boxes[pos + 1].show_end_time = expInfo.wordPlusISI;

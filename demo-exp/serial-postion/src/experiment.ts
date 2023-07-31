@@ -103,7 +103,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
-  /*timeline.push(preload_screen);
+  timeline.push(preload_screen);
   timeline.push(welcome_screen);
   timeline.push(consent_screen);
   timeline.push(notice_screen);
@@ -111,7 +111,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   
   timeline = timeline.concat(instr_line);
   timeline.push(fullMode_screen);
-  */
+  
   timeline = timeline.concat(exp_line);
 
   await jsPsych.run(timeline);

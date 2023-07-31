@@ -1,7 +1,8 @@
 import htmlButtonResponse from '@jspsych/plugin-html-button-response';
 import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
-import { countdownTimer } from '../basic-fun/countdownTimer';
-import { varGlobal } from '../settings';
+import { countdownTimer } from '../basic-fun/countdownTimer'
+import { convertTime } from '../basic-fun/convertTime';
+import { varGlobal, expInfo } from '../settings';
 
 export const exp_start_screen = {
     type: htmlButtonResponse,
@@ -33,10 +34,15 @@ export const trial_start_screen = {
     <br>
   </div>`,
   choices: [' '], // The only valid key response is the space bar.
-  trial_duration: 10 * 1000, // Display the cue screen for 9 seconds before automatically proceeding to the next screen.
-  post_trial_gap: 1000, // Display the cue screen for 1 second after the participant responds.
+  trial_duration: expInfo.startDuration, // Time to wait before automatically proceeding with the next trial.
+  post_trial_gap: expInfo.ITI, // forced intertrial interval after participant's response.
   on_load: function () {
-    countdownTimer(10, "clock")
+    let time = convertTime(expInfo.startDuration, 'ms', 's');
+
+    countdownTimer(
+      // @ts-ignore
+      time, "clock"
+      )
   },
   on_finish: function () {
     varGlobal.run_timer = false;
@@ -53,7 +59,6 @@ export const trial_start_screen = {
  */
 export function createBlockBreak(block: number, nBlock: number, duration: number) {
 
-  
   var minutes = parseInt(String(duration), 10) / 60;
   var seconds = parseInt(String(duration), 10) % 60 - 1;
   const displayText = duration < 100 ? seconds : minutes + ":" + seconds;
@@ -69,10 +74,11 @@ export function createBlockBreak(block: number, nBlock: number, duration: number
         </p>
       </div>`,
     choices: ["Continue"],
-    trial_duration: duration * 1000,
-    post_trial_gap: 1000,
+    trial_duration: convertTime(duration, 's', 'ms'),
+    post_trial_gap: expInfo.ITI,
     on_load: function () {
-      countdownTimer(duration * 1000, "blockClock")
+      // @ts-ignore
+      countdownTimer(convertTime(duration, 's', 'ms'), "blockClock")
     },
     on_finish: function () {
       varGlobal.run_timer = false;
