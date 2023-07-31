@@ -48,6 +48,8 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   /************************************** Experiment **************************************/
 
+  /** Step 1: Create trial list based on desired combination of conditions in experiment **/
+
   // create a list of trials for each condition
   // nExpTrials: number of experiment trials for each condition
   // conditionList: list of setsizes 
@@ -58,6 +60,9 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // chunk trials into blocks: divide the experimental list into nBlock chunks
   const exp_chunks = chunkTrials(exp_trials, expInfo.nBlock);
+ 
+  
+  /** Step 2: Based on  trial list create the code for displaying the information **/
 
   //declare the list that will hold the instructions and trials
   let exp_line:any[] = [];
@@ -65,13 +70,16 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // push alter to begin the main phase of the experiment into the list
   exp_line.push(exp_start_screen);
 
-  // Block
+  // Following loops will create the experiment trials
+  // loop through the blocks (outer loop)
+  // block: index of the block
+  // block_trials: list of trials in the block
   for (var [block, block_trials] of exp_chunks.entries()) {
 
-    // Trial
+    // within each block, loop through the trials (inner loop)
     for (let [index, setsize] of block_trials.entries()) {
 
-      var trial_line = createNewTrial(setsize, 8, "experiment", block, index)
+      var trial_line = createNewTrial(setsize, expInfo.nBoxes, "experiment", block, index)
 
       exp_line = exp_line.concat(trial_line);
 
@@ -80,7 +88,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     // break
     if (block + 1 < expInfo.nBlock) {
 
-      var break_screen = createBlockBreak(block, expInfo.nBlock, 30);
+      var break_screen = createBlockBreak(block, expInfo.nBlock, expInfo.breakDuration);
 
       exp_line.push(break_screen);
 

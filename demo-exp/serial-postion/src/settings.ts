@@ -17,7 +17,7 @@ export const jsPsych = initJsPsych({
         min_height: Math.max(screen.height * 0.75, 550) // minimum height of the window
     },
     */
-   
+
     // check whether participants leave the window or not during the experiment
     on_interaction_data_update: function () {
         control_browser_interactions();
@@ -28,8 +28,13 @@ export const jsPsych = initJsPsych({
 export const expInfo = {
     nExpTrials: 1, // number of experiment trials for each condition
     nBlock: 1, // number of blocks
+    nBoxes: 8, // number of boxes
     conditionList: [4, 5, 6, 7, 8],
-    presentationTime: 1000
+    presentationTime: 1000, // presentation time of each stimulus
+
+    breakDuration: 30 // break duration
+
+
 }
 
 export const varGlobal = {

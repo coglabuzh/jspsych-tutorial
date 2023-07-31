@@ -44,6 +44,13 @@ export const trial_start_screen = {
 };
 
 
+
+/**  create a block break screen
+ * @param {number} block - the current block
+ * @param {number} nBlock - the total number of blocks
+ * @param {number} duration - the duration of the break in seconds
+ * @returns {Object} block_break_screen
+ */
 export function createBlockBreak(block: number, nBlock: number, duration: number) {
 
   
