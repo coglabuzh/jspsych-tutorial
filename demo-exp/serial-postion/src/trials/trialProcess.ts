@@ -16,7 +16,7 @@ import { trial_start_screen } from "../instructions/InstrTrial";
 /**
  * This function creates a main object that will be displayed on the screen.
  * @param {number} num The number of item boxes to generate.
- * @param {string} procedure The name of the current procedure
+ * @param {string} expPart The name of the experiment part (e.g. "practice" or "experiment").
  * @param {number} blockID The number of the current block
  * @param {number} trialID The number of the current trial
  * @param {logical} special A logical object. If true, a fixed alphabet-array would be used.
@@ -25,7 +25,7 @@ class trialStim {
 
   nBox: number; // Number of boxes
   setsize: number; // Number of stimulus
-  procedure: string; // Procedure type
+  expPart: string; // Experiment part (e.g. "practice" or "experiment")
   block: number; // Block ID
   trial: number; // Trial ID
   stim: any[]; // Array of stimulus objects
@@ -35,11 +35,11 @@ class trialStim {
   radius: number; // Radius of the stimuli object
   width: number; // Width of each stimulus
 
-  constructor(setsize: number, nBox: number = 8, procedure: string = 'experiment', blockID: number = 0, trialID: number = 0) {
+  constructor(setsize: number, nBox: number = 8, expPart: string = 'experiment', blockID: number = 0, trialID: number = 0) {
     // These variables define parameters of the stimuli object.
     this.nBox = nBox;
     this.setsize = setsize;
-    this.procedure = procedure;
+    this.expPart = expPart;
     this.block = blockID;
     this.trial = trialID;
 
@@ -108,7 +108,7 @@ trialStim.prototype.memoryPhase = function () {
       trial_duration: 1500,
       data: {
         screenID: 'memory',
-        procedure: this.procedure,
+        expPart: this.expPart,
         blockID: this.block,
         trialID: this.trial,
         stepID: pos + 1,
@@ -171,7 +171,7 @@ trialStim.prototype.retrievalPhase = function () {
       },
       data: {
         screenID: 'retrieval',
-        procedure: this.procedure,
+        expPart: this.expPart,
         blockID: this.block,
         trialID: this.trial,
         stepID: index + 1,
@@ -237,7 +237,7 @@ trialStim.prototype.retrievalPhase2 = function () {
       button_html: buttonCSS,
       data: {
         screenID: 'retrieval',
-        procedure: this.procedure,
+        expPart: this.expPart,
         blockID: this.block,
         trialID: this.trial,
         stepID: index + 1,
@@ -275,7 +275,7 @@ trialStim.prototype.debriefPhase = function () {
     choices: 'NO_KEYS',
     data: {
       screenID: "debrief",
-      procedure: this.procedure,
+      expPart: this.expPart,
       blockID: this.block,
       trialID: this.trial,
       setsize: this.setsize
@@ -287,18 +287,20 @@ trialStim.prototype.debriefPhase = function () {
 
 /**
  * A function used to create a single trial.
- * @param setsize the size of the stimulus
+ * @param setsize the set-size for a trial (how many words are displayed on the screen)
  * @param nBox the number of the boxes that will be displayed on the screen
- * @param procedure the name of the procedure
+ * @param expPart the name of the experimental part (e.g., 'experiment', 'practice')
  * @param blockID the number of the block ID
  * @param trialID the number of the trial ID
  * @returns 
  */
-export function createNewTrial(setsize: number, nBox: number = 8, procedure: string = 'Experiment', blockID: number = 0, trialID: number = 0): string[] {
+export function createNewTrial(
+  setsize: number, nBox: number = 8, expPart: string = 'experiment', blockID: number = 0, trialID: number = 0
+  ): string[] {
 
   var trial_line: any[] = [];
   // create a trial object
-  var trial_body = new trialStim(setsize, nBox, procedure, blockID, trialID);
+  var trial_body = new trialStim(setsize, nBox, expPart, blockID, trialID);
   // preparation screen
   trial_line.push(trial_start_screen);
   // first memory phase
