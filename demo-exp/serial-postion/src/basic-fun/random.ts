@@ -24,7 +24,7 @@ export const random = {
    * @param array 
    * @returns an array
    */
-  shuffle: function <T>(array: T[]) { 
+  shuffle_new: function <T>(array: T[]) { 
     // Iterate through the array backwards
     for (let i = array.length - 1; i > 0; i--) { 
       // Generate a random number between 0 and the current index
@@ -34,6 +34,24 @@ export const random = {
     }
     // Return the shuffled array
     return array; 
+  },
+
+  /** 
+   * Randomly shuffles an array in-place using Knuth's algorithm
+   * (an optimized version of the Fisher-Yates shuffle, see
+   * https://en.wikipedia.org/wiki/Fisher–Yates_shuffle and
+   * https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+   * @param {Array} array The array to shuffle
+   * Returns:
+   *      Nothing, randomizes in-place
+   */
+  shuffle: function <T>(array: T[]) { 
+      for (let i = array.length - 1; i > 0; i--) {
+        let idx = Math.floor(Math.random() * (i + 1));
+        let current = array[i];
+        array[i] = array[idx];
+        array[idx] = current;
+      }
   },
 
   /** Sample a specified number of elements from an array, allowing for either repeated or non-repeated sampling.

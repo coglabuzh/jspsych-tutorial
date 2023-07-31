@@ -136,7 +136,7 @@ trialStim.prototype.retrievalPhase = function () {
   var phase_line: any[] = [];
 
   var asking_order = getIndex(this.stim, "#", false);
-  asking_order = random.shuffle(asking_order);
+  random.shuffle(asking_order);
 
   for (let [index, pos] of asking_order.entries()) {
 
@@ -205,13 +205,13 @@ trialStim.prototype.retrievalPhase2 = function () {
   const NPL_array = random.sample(NPL_pool, 16 - this.setsize);
   const Correct_array = this.stim.filter(function (element) { return element !== "#"; });
   let alter_array = NPL_array.concat(Correct_array);
-  alter_array = random.shuffle(alter_array);
+  random.shuffle(alter_array);
 
   // updated these positions
   var phase_line: any[] = [];
 
   var asking_order = getIndex(this.stim, "#", false);
-  asking_order = random.shuffle(asking_order);
+  random.shuffle(asking_order);
 
   for (let [index, pos] of asking_order.entries()) {
 

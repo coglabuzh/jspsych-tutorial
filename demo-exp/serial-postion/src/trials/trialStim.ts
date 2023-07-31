@@ -15,7 +15,7 @@ export const generateStims = function(setsize: number = 6, nBox:number = 8, stim
     if (stim=="letter") var stim_pool = sequence.alphabet();
     if (stim=="image") {
       for (let i = 1; i < 12; i++) {
-        stim_pool.push(`assets/Images/Stimuli/Image${i}.jpg`);
+        stim_pool.push(`assets/images/stimuli/Image${i}.jpg`);
       };
     } 
   

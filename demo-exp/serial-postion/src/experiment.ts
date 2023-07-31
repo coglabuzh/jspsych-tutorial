@@ -48,9 +48,14 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   /************************************** Experiment **************************************/
 
-  // preparation
+  // create a list of trials for each condition
+  // nExpTrials: number of experiment trials for each condition
+  // conditionList: list of setsizes 
   let exp_trials = Array(expInfo.nExpTrials).fill(expInfo.conditionList).flat();
-  exp_trials = random.shuffle(exp_trials);
+  
+  // randomize the order of trials (shuffle the list - Fisher-Yates algorithm)
+  random.shuffle(exp_trials);
+  // chunk trials into blocks
   const exp_chunks = chunkTrials(exp_trials, expInfo.nBlock);
 
   let exp_line:any[] = [];

@@ -8,7 +8,7 @@ import { check_consent, check_notice } from '../task-fun/checkFun';
 /* informed consent */
 export const consent_screen = {
 type: externalHtml,
-url: "assets/ExternalHtml/Information.html",
+url: "assets/external-html/information.html",
 cont_btn: "agree",
 check_fn: check_consent
 };
@@ -19,7 +19,7 @@ check_fn: check_consent
  */
 export const notice_screen = {
 type: externalHtml,
-url: "assets/ExternalHtml/Notice.html",
+url: "assets/external-html/notice.html",
 cont_btn: "ready",
 check_fn: check_notice
 };
