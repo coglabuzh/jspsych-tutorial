@@ -11,7 +11,7 @@ import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
 import { sequence } from "../basic-fun/sequence";
 import { trial_start_screen } from "../instructions/InstrTrial";
 
-
+import { sizing } from "./sizing";
 
 /**
  * This function creates a main object that will be displayed on the screen.
@@ -47,11 +47,11 @@ class trialStim {
     this.stim = generateStims(setsize);
 
     // These variables define the size and position of the stimuli object on the screen.
-    this.canW = Math.min(screen.width, screen.height / 9 * 16) * 0.9;
+    this.canW = Math.min(screen.width, screen.height / 9 * 16) * sizing.widthAdapt;
     this.canH = this.canW * 0.5;
     this.center = [this.canW / 2, this.canH / 2];
-    this.radius = this.canH * 0.33;
-    this.width = this.canH * 0.175;
+    this.radius = this.canH * sizing.stimRadius;
+    this.width = this.canH * sizing.stimWidth;
   }
 
   // A function used to display items in sequence.
