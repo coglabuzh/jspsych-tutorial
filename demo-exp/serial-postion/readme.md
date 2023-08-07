@@ -1,5 +1,6 @@
 # remember-forget-circle
 
+This experiment relies on Node.js (https://nodejs.org/en/) and jsPsych-builder package (https://github.com/bjoluc/jspsych-builder). Please install the dependent package before running the experiment.
 
 ## How to run the experiment
 - make sure you have (node)[https://nodejs.org/en/] installed
