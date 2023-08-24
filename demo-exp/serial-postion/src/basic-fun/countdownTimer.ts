@@ -8,14 +8,14 @@ import { varGlobal } from "../settings";
  export function countdownTimer(duration:number, displayElementId) {
 
   // allow to run timer
-  varGlobal.run_timer = true;
+  varGlobal.RUN_TIMER = true;
 
     var timer:number = parseInt(String(duration), 10); // Parse duration as an integer
     var minutes, seconds;
   
     var intervalId = setInterval(function () {
 
-      if (!varGlobal.run_timer) {
+      if (!varGlobal.RUN_TIMER) {
         // Check the global variable to see if the timer should be stopped
         clearInterval(intervalId);
         return;
