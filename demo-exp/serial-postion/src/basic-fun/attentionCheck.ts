@@ -13,7 +13,7 @@ export function control_browser_interactions(code: string = "FailedAttention", a
     let get_interactions = jsPsych.data.getInteractionData();
     let interaction_data = JSON.parse(get_interactions.json());
     let last_event = interaction_data[interaction_data.length - 1];
-    if (varGlobal.start_count) {
+    if (varGlobal.TRACK) {
         if (last_event["event"] === "blur") {
 
             // plus one

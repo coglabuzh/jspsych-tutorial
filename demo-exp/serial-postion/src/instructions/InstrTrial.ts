@@ -45,7 +45,7 @@ export const trial_start_screen = {
       )
   },
   on_finish: function () {
-    varGlobal.run_timer = false;
+    varGlobal.RUN_TIMER = false;
   }
 };
 
@@ -81,7 +81,7 @@ export function createBlockBreak(block: number, nBlock: number, duration: number
       countdownTimer(convertTime(duration, 's', 'ms'), "blockClock")
     },
     on_finish: function () {
-      varGlobal.run_timer = false;
+      varGlobal.RUN_TIMER = false;
     }
   };
 

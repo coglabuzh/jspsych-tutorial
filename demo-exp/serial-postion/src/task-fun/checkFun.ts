@@ -8,7 +8,7 @@ import { jsPsych } from "../settings";
  */
 export const check_consent = function () {
 
-    if (varGlobal.run_jatos) {
+    if (varGlobal.RUN_JATOS) {
         //@ts-ignore
         var resultID = jatos.studyResultId
         //@ts-ignore

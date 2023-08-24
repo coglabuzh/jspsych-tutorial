@@ -11,7 +11,7 @@ import { varGlobal } from "../settings";
     </div>`,
     on_finish: function() {
       // start to count that how many times participants has left the browser.
-      varGlobal.start_count = true;
-      varGlobal.n_blur = 0;
+      varGlobal.TRACK = true;
+      varGlobal.N_BLUR = 0;
     }
   }

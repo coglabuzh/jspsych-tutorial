@@ -44,12 +44,11 @@ export const expInfo = {
 }
 
 export const varGlobal = {
-    start_count: false, // 
-    pause: false,
-    n_blur: 0, // use to count how many times participants left the browser
-    max_blur: 3,
-    quit: false,
-    loop: true,
-    run_jatos: false,
-    run_timer: false
+    TRACK: false, // 
+    N_BLUR: 0, // use to count how many times participants left the browser
+    MAX_BLUR: 3,
+    QUIT: false,
+    LOOP: true,
+    RUN_JATOS: false,
+    RUN_TIMER: false
 }
