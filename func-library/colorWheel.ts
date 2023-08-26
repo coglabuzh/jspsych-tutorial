@@ -1,5 +1,8 @@
 
+
 /** A function that draws a color wheel on a canvas
+ * 
+ * @author Chenyu Li, ChatGPT
  * 
  * @param radius The radius of the color wheel
  * @param ratio The ratio of the inner radius to the outer radius
