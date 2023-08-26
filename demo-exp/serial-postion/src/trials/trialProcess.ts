@@ -292,7 +292,8 @@ trialStim.prototype.debriefPhase = function () {
  * @param expPart the name of the experimental part (e.g., 'experiment', 'practice')
  * @param blockID the number of the block ID
  * @param trialID the number of the trial ID
- * @returns 
+ * 
+ * @returns An array containing all the slides of a trial.
  */
 export function createNewTrial(
   setsize: number, nBox: number = 8, expPart: string = 'experiment', blockID: number = 0, trialID: number = 0

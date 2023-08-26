@@ -18,8 +18,8 @@ import { expInfo, jsPsych } from "./settings";
 // import custom functions and screens
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
-import { fullMode_screen } from "./instructions/funScreen";
-import { exp_start_screen, pra_instr_screen, createBlockBreak} from "./instructions/InstrTrial";
+import { fullMode_screen } from "./instructions/fullScreen";
+import { exp_start_screen, createBlockBreak} from "./instructions/InstrTrial";
 import { random } from "./basic-fun/random";
 import { chunkTrials } from "./basic-fun/chunkTrials";
 import { createNewTrial } from "./trials/trialProcess";
@@ -74,21 +74,21 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // loop through the blocks (outer loop)
   // block: index of the block
   // block_trials: list of trials in the block
-  for (var [block, block_trials] of exp_chunks.entries()) {
+  for (var [iBlock, block_trials] of exp_chunks.entries()) {
 
     // within each block, loop through the trials (inner loop)
-    for (let [index, setsize] of block_trials.entries()) {
+    for (let [iTrial, setsize] of block_trials.entries()) {
 
-      var trial_line = createNewTrial(setsize, expInfo.nBoxes, "experiment", block, index)
+      var trial_line = createNewTrial(setsize, expInfo.nBoxes, "experiment", iBlock, iTrial)
 
       exp_line = exp_line.concat(trial_line);
 
     };
 
-    // break
-    if (block + 1 < expInfo.nBlock) {
+    // Insert a break between the blocks
+    if (iBlock + 1 < expInfo.nBlock) {
 
-      var break_screen = createBlockBreak(block, expInfo.nBlock, expInfo.breakDuration);
+      var break_screen = createBlockBreak(iBlock, expInfo.nBlock, expInfo.breakDuration);
 
       exp_line.push(break_screen);
 
@@ -107,11 +107,8 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   timeline.push(welcome_screen);
   timeline.push(consent_screen);
   timeline.push(notice_screen);
-
-  
   timeline = timeline.concat(instr_line);
   timeline.push(fullMode_screen);
-  
   timeline = timeline.concat(exp_line);
 
   await jsPsych.run(timeline);
