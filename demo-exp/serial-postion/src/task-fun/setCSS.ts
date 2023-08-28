@@ -1,7 +1,5 @@
 
 // Import functions
-// import jss from "../OtherPlugins/jss";
-// const jss = require('jss-browserify') as any;
 import jss from 'jss-browserify';
 
 var winW = Math.min(window.innerWidth, window.innerHeight * 1.5);
