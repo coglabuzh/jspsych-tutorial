@@ -7,6 +7,7 @@
     "jatos": "npm run jspsych -- build --jatos"
   },
   "dependencies": {
+    "@jspsych/plugin-browser-check": "^1.0.2",
     "@jspsych/plugin-external-html": "^1.1.2",
     "@jspsych/plugin-fullscreen": "^1.2.0",
     "@jspsych/plugin-html-button-response": "^1.1.2",
@@ -16,6 +17,9 @@
     "@jspsych/plugin-survey-html-form": "^1.0.2",
     "jspsych": "^7.3.1",
     "jss-browserify": "^0.6.0",
+    "ml-matrix": "^6.10.4",
+    "numeric": "^1.2.6",
+    "pixi.js": "^7.2.4",
     "sweetalert2": "^11.7.5"
   },
   "devDependencies": {
