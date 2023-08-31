@@ -75,7 +75,7 @@ export function createBlockBreak(block: number, nBlock: number, duration: number
       </div>`,
     choices: ["Continue"],
     trial_duration: convertTime(duration, 's', 'ms'),
-    post_trial_gap: expInfo.ITI,
+    post_trial_gap: 1000,
     on_load: function () {
       // @ts-ignore
       countdownTimer(convertTime(duration, 's', 'ms'), "blockClock")

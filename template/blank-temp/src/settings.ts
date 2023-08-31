@@ -1,5 +1,5 @@
 
-import { control_browser_interactions } from "./basic-fun/attentionCheck";
+import { track_interactions } from "./basic-fun/attentionCheck";
 import { setCSS } from "./task-fun/setCSS";
 
 setCSS();
@@ -20,7 +20,7 @@ export const jsPsych = initJsPsych({
 
     // check whether participants leave the window or not during the experiment
     on_interaction_data_update: function () {
-        control_browser_interactions();
+        track_interactions(varGlobal, "FailedAttention", true); // For some weird reason, this function does not work if you write out the name of each variable.
       }
 });
 
@@ -32,11 +32,10 @@ export const expInfo = {
     conditionList: [4, 5, 6, 7, 8],
     presentationTime: 1000, // presentation time of each stimulus
     ISI: 500, // inter-stimulus interval
-    wordPlusISI: 1000+500, // time between two stimuli = ISI + presentation time
 
     startDuration: 10 * 1000, // time for the countdown before a new trial starts
     ITI: 1000, // inter-trial interval
-    breakDuration: 30, // break duration
+    breakDuration: 30 * 1000, // break duration
     retrievalTime: 20 * 1000, // time for retrieval
     debriefTime: 2000 // time for feedback
 

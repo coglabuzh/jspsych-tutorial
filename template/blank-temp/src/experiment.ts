@@ -18,6 +18,7 @@ import { jsPsych } from "./settings";
 // import custom functions and screens
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
+import { browser_screen } from "./instructions/browserCheck";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -55,6 +56,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   timeline.push(welcome_screen);
   timeline.push(consent_screen);
   timeline.push(notice_screen);
+  timeline.push(browser_screen);
 
   await jsPsych.run(timeline);
 
