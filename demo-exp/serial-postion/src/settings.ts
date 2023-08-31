@@ -20,13 +20,13 @@ export const jsPsych = initJsPsych({
 
 
 export const expInfo = {
+    expName: "serial_position",
     nExpTrials: 1, // number of experiment trials for each condition
     nBlock: 1, // number of blocks
     nBoxes: 8, // number of boxes
-    conditionList: [4, 5, 6, 7, 8],
+    conditionList: [5, 6, 7, 8],
     presentationTime: 1000, // presentation time of each stimulus
     ISI: 500, // inter-stimulus interval
-    wordPlusISI: 1000+500, // time between two stimuli = ISI + presentation time
 
     startDuration: 10 * 1000, // time for the countdown before a new trial starts
     ITI: 1000, // inter-trial interval
@@ -43,6 +43,6 @@ export const varGlobal = {
     MAX_BLUR: 3,
     QUIT: false,
     LOOP: true,
-    RUN_JATOS: false,
+    RUN_JATOS: true,
     RUN_TIMER: false
 }

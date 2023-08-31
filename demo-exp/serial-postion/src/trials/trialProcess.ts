@@ -44,7 +44,7 @@ class trialStim {
     this.trial = trialID;
 
     // This creates an array with the correct answers. "#" represents a removed stimulus.
-    this.stim = generateStims(setsize);
+    this.stim = generateStims(setsize, nBox);
 
     // These variables define the size and position of the stimuli object on the screen.
     this.canW = Math.min(screen.width, screen.height / 9 * 16) * sizing.widthAdapt;
@@ -93,8 +93,8 @@ trialStim.prototype.memoryPhase = function () {
     var letter_boxes = stimBoxes(this.nBox, content, [], this.center, this.width, this.radius)
 
     // Set the start time and end time for the presentation of the letter at the current position in the "letter_boxes" array.
-    letter_boxes[pos + 1].show_start_time =  expInfo.ISI;
-    letter_boxes[pos + 1].show_end_time = expInfo.wordPlusISI;
+    letter_boxes[pos + 1].show_start_time =  0;
+    letter_boxes[pos + 1].show_end_time = expInfo.presentationTime;
 
     // Define a new object called "stim_screen" with various properties
     let stim_screen = {
@@ -105,7 +105,7 @@ trialStim.prototype.memoryPhase = function () {
       stimuli: letter_boxes,
       response_type: 'key',
       choices: 'NO_KEYS',
-      trial_duration: expInfo.wordPlusISI,
+      trial_duration: expInfo.ISI + expInfo.presentationTime,
       data: {
         screenID: 'memory',
         expPart: this.expPart,

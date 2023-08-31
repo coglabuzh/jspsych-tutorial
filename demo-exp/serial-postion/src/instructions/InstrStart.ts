@@ -1,4 +1,4 @@
-import {jsPsych} from '../settings';
+import { expInfo, jsPsych} from '../settings';
 import instructions from "@jspsych/plugin-instructions"
 import { createNewTrial } from '../trials/trialProcess';
 
@@ -11,7 +11,7 @@ const instr2 = `<div class="main">
 <img src="assets/Images/RetrievalPhase.gif" class="image"></img>
 </div>`;
 
-const loop_trial = createNewTrial(5, 8, "practice", 0, 0)
+const loop_trial:any[] = createNewTrial(5, expInfo.nBoxes, "practice", 0, 0)
   
 const slide_line = {
     type: instructions,

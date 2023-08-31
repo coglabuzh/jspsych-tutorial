@@ -63,7 +63,7 @@ export function track_interactions(blur:blurObject, code: string = "FailedAttent
     
                 jsPsych.endExperiment();
                 //@ts-ignore
-                if (varGlobal.run_jatos) jatos.endStudyAndRedirect(`https://app.prolific.co/submissions/complete?cc=${code}`,false, "Failed");
+                if (varGlobal.RUN_JATOS) jatos.endStudyAndRedirect(`https://app.prolific.co/submissions/complete?cc=${code}`,false, "Failed");
     
             };
         }
