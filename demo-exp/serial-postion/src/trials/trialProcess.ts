@@ -15,7 +15,8 @@ import { sizing } from "./sizing";
 
 /**
  * This function creates a main object that will be displayed on the screen.
- * @param {number} num The number of item boxes to generate.
+ * @param {number} setsoue The set-size.
+* @param {number} nBox The number of item boxes to generate.
  * @param {string} expPart The name of the experiment part (e.g. "practice" or "experiment").
  * @param {number} blockID The number of the current block
  * @param {number} trialID The number of the current trial

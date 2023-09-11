@@ -4,8 +4,10 @@ import { sequence } from "../basic-fun/sequence";
 
 /**
  * Generates a stimulus array based on the specified condition.
- * @param {string} condition - The condition to generate the stimulus array for.
- * @returns {Object} An object containing the stimulus array and the positions to be removed (if applicable).
+ * @param {number} [setsize=6] - The number of stimuli to generate (default is 6).
+ * @param {number} [nBox=8] - The number of boxes presented (default is 8).
+ * @param {string} [stim="letter"] - The type of stimuli to generate ("letter" or "image," default is "letter").
+ * @returns {string[]} An array of generated stimuli based on the specified parameters.
  */
 export const generateStims = function(setsize: number = 6, nBox:number = 8, stim = "letter") {
 
