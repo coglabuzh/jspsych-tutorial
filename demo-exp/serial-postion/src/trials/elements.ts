@@ -9,8 +9,14 @@
  * @param {string} title - The title to display above the screen elements.
  * @returns {Array} An array of screen elements (rectangles and text).
  */
-export function stimBoxes(nBox: number = 8, content: any[] = [], cueBox: number[] = [], center: number[], width: number, radius: number) {
-
+export function stimBoxes(
+  nBox: number = 8,
+  content: any[] = [],
+  cueBox: number[] = [],
+  center: number[],
+  width: number,
+  radius: number
+) {
   // Calculate the angle between adjacent screen elements.
   let theta = (2 / nBox) * Math.PI;
 
@@ -28,10 +34,10 @@ export function stimBoxes(nBox: number = 8, content: any[] = [], cueBox: number[
 
     // Determine the border color and width based on whether the current screen element is the cue box.
     if (cueBox.includes(i)) {
-      var borderColor = 'red';
+      var borderColor = "red";
       var borderWidth = 5;
     } else {
-      var borderColor = 'black';
+      var borderColor = "black";
       var borderWidth = 3;
     }
 
@@ -49,7 +55,6 @@ export function stimBoxes(nBox: number = 8, content: any[] = [], cueBox: number[
 
     // If there is content for the current screen element, create a text object for it.
     if (content[i] !== undefined) {
-
       if (content[i].includes(".")) {
         var Pic = {
           obj_type: "image",
@@ -61,7 +66,6 @@ export function stimBoxes(nBox: number = 8, content: any[] = [], cueBox: number[
 
         // Push the picture into the slide
         screen_elements.push(Pic);
-
       } else {
         var Word: object = {
           obj_type: "text",
@@ -74,9 +78,8 @@ export function stimBoxes(nBox: number = 8, content: any[] = [], cueBox: number[
         // Push the word into the slide
         screen_elements.push(Word);
       }
-
-    };
-  };
+    }
+  }
 
   // Return the array of screen elements.
   return screen_elements;
