@@ -2,9 +2,11 @@
 __pycache__/
 .vscode/
 .log
+.jspsych-builder/
 ~$*
 *.tmp
 node_modules/
+packaged/
 
 # Word temporary
 ~$*.doc*
