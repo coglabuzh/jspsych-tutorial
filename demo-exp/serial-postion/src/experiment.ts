@@ -1,6 +1,6 @@
 /**
  * @title Serial position recall task
- * @description This is a demo experiment based on the position recall task. 
+ * @description This is a demo experiment based on the position recall task.
  * @version 0.1.1
  *
  * @assets assets/
@@ -10,7 +10,7 @@
 import "../styles/main.scss";
 
 // import plugins from jspsych
-import preload from '@jspsych/plugin-preload';
+import preload from "@jspsych/plugin-preload";
 
 // import setting
 import { expInfo, jsPsych } from "./settings";
@@ -21,7 +21,7 @@ import { consent_screen, notice_screen } from "./instructions/consent";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { browser_screen } from "./instructions/browserCheck";
 import { download_line } from "./instructions/downloadFiles";
-import { exp_start_screen, createBlockBreak} from "./instructions/InstrTrial";
+import { exp_start_screen, createBlockBreak } from "./instructions/InstrTrial";
 import { random } from "./basic-fun/random";
 import { chunkTrials } from "./basic-fun/chunkTrials";
 import { createNewTrial } from "./trials/trialProcess";
@@ -32,8 +32,13 @@ import { createInstr } from "./instructions/InstrStart";
  *
  * @type {import("jspsych-builder").RunFunction}
  */
-export async function run({ assetPaths, input = {}, environment, title, version }) {
-
+export async function run({
+  assetPaths,
+  input = {},
+  environment,
+  title,
+  version,
+}) {
   // Initialize a timeline to hold the trials
   var timeline: any[] = [];
 
@@ -46,7 +51,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   };
 
   // Instruction
-  const instr_line = createInstr(4)
+  const instr_line = createInstr(4);
 
   /************************************** Experiment **************************************/
 
@@ -54,20 +59,19 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // create a list of trials for each condition
   // nExpTrials: number of experiment trials for each condition
-  // conditionList: list of setsizes 
+  // conditionList: list of setsizes
   let exp_trials = Array(expInfo.nExpTrials).fill(expInfo.conditionList).flat();
-  
+
   // randomize the order of trials (shuffle the list - Fisher-Yates algorithm)
   random.shuffle(exp_trials);
 
   // chunk trials into blocks: divide the experimental list into nBlock chunks
   const exp_chunks = chunkTrials(exp_trials, expInfo.nBlock);
- 
-  
+
   /** Step 2: Based on  trial list create the code for displaying the information **/
 
   //declare the list that will hold the instructions and trials
-  let exp_line:any[] = [];
+  let exp_line: any[] = [];
 
   // push alter to begin the main phase of the experiment into the list
   exp_line.push(exp_start_screen);
@@ -77,29 +81,33 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // block: index of the block
   // block_trials: list of trials in the block
   for (var [iBlock, block_trials] of exp_chunks.entries()) {
-
     // within each block, loop through the trials (inner loop)
     for (let [iTrial, setsize] of block_trials.entries()) {
-
-      var trial_line = createNewTrial(setsize, expInfo.nBoxes, "experiment", iBlock, iTrial)
+      var trial_line = createNewTrial(
+        setsize,
+        expInfo.nBoxes,
+        "experiment",
+        iBlock,
+        iTrial
+      );
 
       exp_line = exp_line.concat(trial_line);
-
-    };
+    }
 
     // Insert a break between the blocks
     if (iBlock + 1 < expInfo.nBlock) {
-
-      var break_screen = createBlockBreak(iBlock, expInfo.nBlock, expInfo.breakDuration);
+      var break_screen = createBlockBreak(
+        iBlock,
+        expInfo.nBlock,
+        expInfo.breakDuration
+      );
 
       exp_line.push(break_screen);
-
-    };
-  };
-
+    }
+  }
 
   /************************************** Procedure **************************************/
- 
+
   // TODO HANNAH: alters participant if they try to resize the window
   // addEventListener("resize", (event) => { alert("don't resize")});
 

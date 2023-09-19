@@ -24,7 +24,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.2.3",
-    "jspsych-builder": "^4.3.3"
+    "jspsych-builder": "^4.3.3",
+    "prettier": "^3.0.3"
   },
   "browserslist": ">0.25%, not dead"
 }

@@ -1,8 +1,6 @@
-
 export const random = {
-
   /** This function generate a random floating-point number between 0 (inclusive) and 1 (exclusive)
-   * 
+   *
    * @returns a random number between 0 and 1
    */
   random: function () {
@@ -10,9 +8,9 @@ export const random = {
   },
 
   /** This function generates a random integer within the specified range.
-   * 
-   * @param start 
-   * @param end 
+   *
+   * @param start
+   * @param end
    * @returns a random integer in the given range
    */
   randint: function (start: number, end: number): number {
@@ -20,23 +18,23 @@ export const random = {
   },
 
   /** shuffle the given array, support any type of array
-   * 
-   * @param array 
+   *
+   * @param array
    * @returns an array
    */
-  shuffle_new: function <T>(array: T[]) { 
+  shuffle_new: function <T>(array: T[]) {
     // Iterate through the array backwards
-    for (let i = array.length - 1; i > 0; i--) { 
+    for (let i = array.length - 1; i > 0; i--) {
       // Generate a random number between 0 and the current index
-      const j = Math.floor(Math.random() * (i + 1)); 
+      const j = Math.floor(Math.random() * (i + 1));
       // Swap the current item with the randomly chosen one
-      [array[i], array[j]] = [array[j], array[i]]; 
+      [array[i], array[j]] = [array[j], array[i]];
     }
     // Return the shuffled array
-    return array; 
+    return array;
   },
 
-  /** 
+  /**
    * Randomly shuffles an array in-place using Knuth's algorithm
    * (an optimized version of the Fisher-Yates shuffle, see
    * https://en.wikipedia.org/wiki/Fisher–Yates_shuffle and
@@ -45,26 +43,26 @@ export const random = {
    * Returns:
    *      Nothing, randomizes in-place
    */
-  shuffle: function <T>(array: T[]) { 
-      for (let i = array.length - 1; i > 0; i--) {
-        let idx = Math.floor(Math.random() * (i + 1));
-        let current = array[i];
-        array[i] = array[idx];
-        array[idx] = current;
-      }
+  shuffle: function <T>(array: T[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let idx = Math.floor(Math.random() * (i + 1));
+      let current = array[i];
+      array[i] = array[idx];
+      array[idx] = current;
+    }
   },
 
   /** Sample a specified number of elements from an array, allowing for either repeated or non-repeated sampling.
-   * 
-   * @param arr 
+   *
+   * @param arr
    * @param num  The sample size.
    * @param repeat if true, the sampled array could have repeated element; otherwise, not.
-   * @returns 
+   * @returns
    */
   sample: function <T>(arr: T[], num: number, repeat = false): T[] {
     const result: T[] = [];
     const new_arr: T[] = Array.from(arr);
-  
+
     // If repeat is false, sample without repetition
     if (!repeat) {
       // Repeat num times
@@ -84,8 +82,8 @@ export const random = {
         result.push(arr[ran]);
       }
     }
-  
+
     // Return the sampled elements array
     return result;
-  }
+  },
 };
