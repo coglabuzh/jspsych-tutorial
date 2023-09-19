@@ -10,7 +10,7 @@
 import "../styles/main.scss";
 
 // import plugins from jspsych
-import preload from "@jspsych/plugin-preload";
+import preload from '@jspsych/plugin-preload';
 
 // import setting
 import { jsPsych } from "./settings";
@@ -25,13 +25,8 @@ import { browser_screen } from "./instructions/browserCheck";
  *
  * @type {import("jspsych-builder").RunFunction}
  */
-export async function run({
-  assetPaths,
-  input = {},
-  environment,
-  title,
-  version,
-}) {
+export async function run({ assetPaths, input = {}, environment, title, version }) {
+
   // Initialize a timeline to hold the trials
   var timeline: any[] = [];
 
@@ -43,23 +38,25 @@ export async function run({
     // video: assetPaths.video,
   };
 
+
+
   /************************************** Experiment **************************************/
 
-  /************************************** Procedure **************************************/
+  
 
-  // alters participant if they try to resize the window
+
+  /************************************** Procedure **************************************/
+ 
+  // TODO HANNAH: alters participant if they try to resize the window
   // addEventListener("resize", (event) => { alert("don't resize")});
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
-
-  //add "hello world" screen here
-
-  // timeline.push(preload_screen);
-  // timeline.push(welcome_screen);
-  // timeline.push(consent_screen);
-  // timeline.push(notice_screen);
-  // timeline.push(browser_screen);
+  timeline.push(preload_screen);
+  timeline.push(welcome_screen);
+  timeline.push(consent_screen);
+  timeline.push(notice_screen);
+  timeline.push(browser_screen);
 
   await jsPsych.run(timeline);
 
