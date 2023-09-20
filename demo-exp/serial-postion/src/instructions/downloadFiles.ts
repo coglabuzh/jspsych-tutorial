@@ -9,7 +9,7 @@ const download_screen = {
         <p class="fb-text">
           For some internet issue, we are able to upload your data to the server.
           Please click on the "Download" button below to download your data.
-          And send the data to the following email address: chenyu.li@uzh.ch<br>
+          And send the data to the following email address: YOUR E-MAIL address<br>
         </p>
       </div>`,
   choices: ["&nbsp;Continue&nbsp;"],

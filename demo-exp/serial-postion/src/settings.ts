@@ -35,6 +35,22 @@ export const varGlobal = {
   MAX_BLUR: 3,
   QUIT: false,
   LOOP: true,
-  RUN_JATOS: true,
+  RUN_JATOS: false,
   RUN_TIMER: false,
+
+  KEYS: {
+    CONTINUE: "enter",
+    LEFT: "s",
+    RIGHT: "l",
+    START_TRIAL: " ",
+  },
+  KEYS_JS: {
+    CONTINUE: 13,
+    BACK: 90,
+    ONE: 49,
+    TWO: 50,
+    THREE: 51,
+    LEFT: 83,
+    RIGHT: 76,
+  },
 };

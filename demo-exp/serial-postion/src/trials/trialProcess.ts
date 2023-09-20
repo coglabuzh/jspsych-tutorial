@@ -6,12 +6,14 @@ import { createButtonMatrix } from "../task-fun/setCSS";
 import { generateStims } from "./trialStim";
 import { stimBoxes } from "./elements";
 
-import { expInfo, jsPsych } from "../settings";
+import { expInfo, jsPsych, varGlobal } from "../settings";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { sequence } from "../basic-fun/sequence";
 import { trial_start_screen } from "../instructions/InstrTrial";
 
 import { sizing } from "./sizing";
+
+let { KEYS } = varGlobal;
 
 /**
  * This function creates a main object that will be displayed on the screen.
@@ -166,7 +168,7 @@ trialStim.prototype.retrievalPhase = function () {
       stimuli: boxes,
       response_type: "key",
       trial_duration: expInfo.retrievalTime,
-      choices: ["Enter"],
+      choices: [KEYS.CONTINUE],
       key_down_func: function (event) {
         let key = event.key;
         let allowed_keys = sequence
@@ -180,7 +182,7 @@ trialStim.prototype.retrievalPhase = function () {
         } else if (key == "Backspace") {
           jsPsych.getCurrentTrial().stim_array[pos + 1].content = `?`;
           jsPsych.getCurrentTrial().data.response = "#";
-        } else if (key == "Enter") {
+        } else if (key == KEYS.CONTINUE) {
           if (!jsPsych.getCurrentTrial().data.response) {
             jsPsych.getCurrentTrial().data.response = "#";
           }
