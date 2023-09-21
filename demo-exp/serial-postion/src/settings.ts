@@ -1,4 +1,6 @@
 import { track_interactions } from "./basic-fun/attentionCheck";
+import { convertCase } from "./basic-fun/convertCase";
+import { sequence } from "./basic-fun/sequence";
 import { setCSS } from "./task-fun/setCSS";
 
 setCSS();
@@ -30,7 +32,7 @@ export const expInfo = {
 };
 
 export const varGlobal = {
-  TRACK: true, //
+  TRACK: false, // a switch to track participants' interactions with the browser
   N_BLUR: 0, // use to count how many times participants left the browser
   MAX_BLUR: 3,
   QUIT: false,
@@ -38,12 +40,17 @@ export const varGlobal = {
   RUN_JATOS: false,
   RUN_TIMER: false,
 
+  // The key is case-sensitive. It is recommended to allow both upper and lower case keys.
+  // You can use the `convertCase` function to prevent the issue.
   KEYS: {
-    CONTINUE: "enter",
-    LEFT: "s",
-    RIGHT: "l",
-    START_TRIAL: " ",
+    CONTINUE: ["enter"],
+    ALLOW_KEYS: convertCase(sequence.alphabet(false)), // Both lower case letters and upper case letters are allowed.
+    LEFT: convertCase(["f"]), // here is just an example, they will not be used in the experiment.
+    RIGHT: convertCase(["j"]), // here is just an example, they will not be used in the experiment.
+    START_TRIAL: [" "],
   },
+
+
   KEYS_JS: {
     CONTINUE: 13,
     BACK: 90,

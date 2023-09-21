@@ -168,21 +168,20 @@ trialStim.prototype.retrievalPhase = function () {
       stimuli: boxes,
       response_type: "key",
       trial_duration: expInfo.retrievalTime,
-      choices: [KEYS.CONTINUE],
+      choices: KEYS.CONTINUE,
       key_down_func: function (event) {
+        // get the value of the key that the participant pressed
         let key = event.key;
-        let allowed_keys = sequence
-          .alphabet(false)
-          .concat(sequence.alphabet(true));
-        if (allowed_keys.includes(key)) {
-          jsPsych.getCurrentTrial().stim_array[
-            pos + 1
-          ].content = `${key.toUpperCase()}`;
+        //@ts-ignore if the key that participant pressed is allowed, display the key and save the result
+        if (KEYS.ALLOW_KEYS.includes(key)) {
+          jsPsych.getCurrentTrial().stim_array[pos + 1].content = `${key.toUpperCase()}`;
           jsPsych.getCurrentTrial().data.response = key.toUpperCase();
-        } else if (key == "Backspace") {
+        // if the key that participant pressed is "backspace", remove the answer from the screen and save the result
+        } else if (key === "Backspace") {
           jsPsych.getCurrentTrial().stim_array[pos + 1].content = `?`;
           jsPsych.getCurrentTrial().data.response = "#";
-        } else if (key == KEYS.CONTINUE) {
+        // if the key that participant pressed is a continue key, go to the next step 
+        } else if (KEYS.CONTINUE.includes(key)) {
           if (!jsPsych.getCurrentTrial().data.response) {
             jsPsych.getCurrentTrial().data.response = "#";
           }

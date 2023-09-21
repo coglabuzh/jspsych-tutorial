@@ -5,6 +5,7 @@ interface blurObject {
   TRACK: boolean;
   MAX_BLUR: number;
   N_BLUR: number;
+  RUN_JATOS: boolean;
 }
 
 /** Contro the browser interactions
@@ -57,8 +58,9 @@ export function track_interactions(
         });
 
         jsPsych.endExperiment();
+        
+        if (blur.RUN_JATOS)
         //@ts-ignore
-        if (varGlobal.RUN_JATOS)
           jatos.endStudyAndRedirect(
             `https://app.prolific.co/submissions/complete?cc=${code}`,
             false,

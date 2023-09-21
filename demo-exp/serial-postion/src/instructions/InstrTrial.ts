@@ -32,7 +32,7 @@ export const trial_start_screen = {
     <br>
     <br>
   </div>`,
-  choices: [KEYS.START_TRIAL], // The only valid key response is the space bar.
+  choices: KEYS.START_TRIAL, // The only valid key response is the space bar.
   trial_duration: expInfo.startDuration, // Time to wait before automatically proceeding with the next trial.
   post_trial_gap: expInfo.ITI, // forced intertrial interval after participant's response.
   on_load: function () {
