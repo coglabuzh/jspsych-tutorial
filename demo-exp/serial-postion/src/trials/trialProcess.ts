@@ -6,7 +6,8 @@ import { createButtonMatrix } from "../task-fun/setCSS";
 import { generateStims } from "./trialStim";
 import { stimBoxes } from "./elements";
 
-import { expInfo, jsPsych, varGlobal } from "../settings";
+import { expInfo, varGlobal } from "../settings";
+import { jsPsych } from "../jsp";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { sequence } from "../basic-fun/sequence";
 import { trial_start_screen } from "../instructions/InstrTrial";
@@ -174,13 +175,15 @@ trialStim.prototype.retrievalPhase = function () {
         let key = event.key;
         //@ts-ignore if the key that participant pressed is allowed, display the key and save the result
         if (KEYS.ALLOW_KEYS.includes(key)) {
-          jsPsych.getCurrentTrial().stim_array[pos + 1].content = `${key.toUpperCase()}`;
+          jsPsych.getCurrentTrial().stim_array[
+            pos + 1
+          ].content = `${key.toUpperCase()}`;
           jsPsych.getCurrentTrial().data.response = key.toUpperCase();
-        // if the key that participant pressed is "backspace", remove the answer from the screen and save the result
+          // if the key that participant pressed is "backspace", remove the answer from the screen and save the result
         } else if (key === "Backspace") {
           jsPsych.getCurrentTrial().stim_array[pos + 1].content = `?`;
           jsPsych.getCurrentTrial().data.response = "#";
-        // if the key that participant pressed is a continue key, go to the next step 
+          // if the key that participant pressed is a continue key, go to the next step
         } else if (KEYS.CONTINUE.includes(key)) {
           if (!jsPsych.getCurrentTrial().data.response) {
             jsPsych.getCurrentTrial().data.response = "#";

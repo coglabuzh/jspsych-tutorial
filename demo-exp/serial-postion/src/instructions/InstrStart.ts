@@ -1,4 +1,5 @@
-import { expInfo, jsPsych } from "../settings";
+import { expInfo } from "../settings";
+import { jsPsych } from "../jsp";
 import instructions from "@jspsych/plugin-instructions";
 import { createNewTrial } from "../trials/trialProcess";
 

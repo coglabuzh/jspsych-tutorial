@@ -1,19 +1,8 @@
-import { track_interactions } from "./basic-fun/attentionCheck";
 import { convertCase } from "./basic-fun/convertCase";
 import { sequence } from "./basic-fun/sequence";
 import { setCSS } from "./task-fun/setCSS";
 
 setCSS();
-
-// Initialize JsPsych
-import { initJsPsych } from "jspsych";
-
-export const jsPsych = initJsPsych({
-  // check whether participants leave the window or not during the experiment
-  on_interaction_data_update: function () {
-    track_interactions(varGlobal, "FailedAttention", true); // For some weird reason, this function does not work if you write out the name of each variable.
-  },
-});
 
 export const expInfo = {
   expName: "serial_position",
@@ -49,7 +38,6 @@ export const varGlobal = {
     RIGHT: convertCase(["j"]), // here is just an example, they will not be used in the experiment.
     START_TRIAL: [" "],
   },
-
 
   KEYS_JS: {
     CONTINUE: 13,

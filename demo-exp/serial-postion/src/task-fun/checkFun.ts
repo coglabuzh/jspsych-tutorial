@@ -1,5 +1,5 @@
 import { varGlobal } from "../settings";
-import { jsPsych } from "../settings";
+import { jsPsych } from "../jsp";
 
 /**
  * Check if the participant agree with all the items in the consent and input their participant ID.

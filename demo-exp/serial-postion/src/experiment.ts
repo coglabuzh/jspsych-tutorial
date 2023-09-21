@@ -13,7 +13,8 @@ import "../styles/main.scss";
 import preload from "@jspsych/plugin-preload";
 
 // import setting
-import { expInfo, jsPsych } from "./settings";
+import { expInfo } from "./settings";
+import { jsPsych } from "./jsp";
 
 // import custom functions and screens
 import { welcome_screen } from "./instructions/welcome";

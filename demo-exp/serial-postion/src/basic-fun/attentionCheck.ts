@@ -1,4 +1,4 @@
-import { jsPsych } from "../settings";
+import { jsPsych } from "../jsp";
 import Swal from "sweetalert2";
 
 interface blurObject {
@@ -58,9 +58,9 @@ export function track_interactions(
         });
 
         jsPsych.endExperiment();
-        
+
         if (blur.RUN_JATOS)
-        //@ts-ignore
+          //@ts-ignore
           jatos.endStudyAndRedirect(
             `https://app.prolific.co/submissions/complete?cc=${code}`,
             false,
