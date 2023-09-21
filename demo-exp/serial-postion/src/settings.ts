@@ -28,6 +28,7 @@ export const varGlobal = {
   LOOP: true,
   RUN_JATOS: false,
   RUN_TIMER: false,
+  FailedAttentionCheck: false,
 
   // The key is case-sensitive. It is recommended to allow both upper and lower case keys.
   // You can use the `convertCase` function to prevent the issue.
