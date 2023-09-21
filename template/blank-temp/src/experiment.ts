@@ -10,10 +10,10 @@
 import "../styles/main.scss";
 
 // import plugins from jspsych
-import preload from '@jspsych/plugin-preload';
+import preload from "@jspsych/plugin-preload";
 
 // import setting
-import { jsPsych } from "./settings";
+import { jsPsych } from "./jsp";
 
 // import custom functions and screens
 import { welcome_screen } from "./instructions/welcome";
@@ -25,8 +25,13 @@ import { browser_screen } from "./instructions/browserCheck";
  *
  * @type {import("jspsych-builder").RunFunction}
  */
-export async function run({ assetPaths, input = {}, environment, title, version }) {
-
+export async function run({
+  assetPaths,
+  input = {},
+  environment,
+  title,
+  version,
+}) {
   // Initialize a timeline to hold the trials
   var timeline: any[] = [];
 
@@ -38,15 +43,10 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     // video: assetPaths.video,
   };
 
-
-
   /************************************** Experiment **************************************/
 
-  
-
-
   /************************************** Procedure **************************************/
- 
+
   // TODO HANNAH: alters participant if they try to resize the window
   // addEventListener("resize", (event) => { alert("don't resize")});
 
