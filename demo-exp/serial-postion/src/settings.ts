@@ -5,48 +5,57 @@ import { setCSS } from "./task-fun/setCSS";
 setCSS();
 
 export const expInfo = {
+
+  // settings for the experiment
   expName: "serial_position",
   nExpTrials: 1, // number of experiment trials for each condition
   nBlock: 1, // number of blocks
   nBoxes: 8, // number of boxes
   conditionList: [5, 6, 7, 8],
+
+  // settings for each trial
   presentationTime: 1000, // presentation time of each stimulus
   ISI: 500, // inter-stimulus interval
-
   startDuration: 10 * 1000, // time for the countdown before a new trial starts
   ITI: 1000, // inter-trial interval
   breakDuration: 30, // break duration
   retrievalTime: 20 * 1000, // time for retrieval
   debriefTime: 2000, // time for feedback
-};
 
-export const varGlobal = {
-  TRACK: false, // a switch to track participants' interactions with the browser
-  N_BLUR: 0, // use to count how many times participants left the browser
-  MAX_BLUR: 3,
-  QUIT: false,
-  LOOP: true,
-  RUN_JATOS: false,
-  RUN_TIMER: false,
-  FailedAttentionCheck: false,
+  // if you want to use the JATOS, you have to set the following two variables.
+  completedCode: "completed", // the code for the completed experiment
+  failedCode: "failed", // the code for the failed experiment
 
-  // The key is case-sensitive. It is recommended to allow both upper and lower case keys.
-  // You can use the `convertCase` function to prevent the issue.
+
+  /** The key is case-sensitive and position-sensitive. 
+   * It is recommended to allow both upper and lower case keys.
+   * You can use the `convertCase` function to prevent the issue.
+   * Be cautious, the names of the number keys on the top of the keyboard
+   * are different from those on the right side of the keyboard.
+   */
   KEYS: {
     CONTINUE: ["enter"],
     ALLOW_KEYS: convertCase(sequence.alphabet(false)), // Both lower case letters and upper case letters are allowed.
-    LEFT: convertCase(["f"]), // here is just an example, they will not be used in the experiment.
-    RIGHT: convertCase(["j"]), // here is just an example, they will not be used in the experiment.
     START_TRIAL: [" "],
   },
 
-  KEYS_JS: {
-    CONTINUE: 13,
-    BACK: 90,
-    ONE: 49,
-    TWO: 50,
-    THREE: 51,
-    LEFT: 83,
-    RIGHT: 76,
-  },
+  // If you want to use the keyCode rather than key name,
+  // you can go to the following link to get the key code:
+  // https://www.toptal.com/developers/keycode/
+
+  // Running environment variables
+  RUN_JATOS: false, // a switch to run the experiment on JATOS
+};
+
+
+
+// Global variables for the system. Normally, you don't need to change them.
+export const varSystem = {
+  TRACK: false, // a switch to track participants' interactions with the browser
+  nBlur: 0, // use to count how many times participants left the browser
+  MAX_BLUR: 3, // the maximum number of times participants can leave the browser
+  QUIT: false,
+  LOOP: true, // a switch to control whether participants need to read the instruction and practice again
+  RUN_TIMER: false, // a switch to control the countdown timer
+  FailedAttentionCheck: false,
 };

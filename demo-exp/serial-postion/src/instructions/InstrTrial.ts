@@ -2,8 +2,8 @@ import htmlButtonResponse from "@jspsych/plugin-html-button-response";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { countdownTimer } from "../basic-fun/countdownTimer";
 import { convertTime } from "../basic-fun/convertTime";
-import { varGlobal, expInfo } from "../settings";
-let { KEYS } = varGlobal;
+import { varSystem, expInfo } from "../settings";
+let { KEYS } = expInfo;
 
 export const exp_start_screen = {
   type: htmlButtonResponse,
@@ -34,18 +34,14 @@ export const trial_start_screen = {
   </div>`,
   choices: KEYS.START_TRIAL, // The only valid key response is the space bar.
   trial_duration: expInfo.startDuration, // Time to wait before automatically proceeding with the next trial.
-  post_trial_gap: expInfo.ITI, // forced intertrial interval after participant's response.
+  post_trial_gap: expInfo.ITI, // forced inter-trial interval after participant's response.
   on_load: function () {
     let time = convertTime(expInfo.startDuration, "ms", "s");
-
-    countdownTimer(
-      // @ts-ignore
-      time,
-      "clock"
-    );
+    //@ts-ignore
+    countdownTimer(varSystem, time, "clock");
   },
   on_finish: function () {
-    varGlobal.RUN_TIMER = false;
+    varSystem.RUN_TIMER = false;
   },
 };
 
@@ -81,7 +77,7 @@ export function createBlockBreak(
       countdownTimer(convertTime(duration, "s", "ms"), "blockClock");
     },
     on_finish: function () {
-      varGlobal.RUN_TIMER = false;
+      varSystem.RUN_TIMER = false;
     },
   };
 

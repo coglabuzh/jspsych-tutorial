@@ -21,7 +21,6 @@ import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { browser_screen } from "./instructions/browserCheck";
-import { end_screen } from "./instructions/endExperiment";
 import { exp_start_screen, createBlockBreak } from "./instructions/InstrTrial";
 import { random } from "./basic-fun/random";
 import { chunkTrials } from "./basic-fun/chunkTrials";
@@ -123,7 +122,6 @@ export async function run({
   timeline = timeline.concat(instr_line);
   timeline.push(fullMode_screen);
   timeline = timeline.concat(exp_line);
-  timeline.push(end_screen); // send all the data to JATOS or download the data
 
   await jsPsych.run(timeline);
 

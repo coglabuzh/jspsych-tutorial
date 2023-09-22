@@ -6,7 +6,7 @@ import { createButtonMatrix } from "../task-fun/setCSS";
 import { generateStims } from "./trialStim";
 import { stimBoxes } from "./elements";
 
-import { expInfo, varGlobal } from "../settings";
+import { expInfo } from "../settings";
 import { jsPsych } from "../jsp";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { sequence } from "../basic-fun/sequence";
@@ -14,7 +14,7 @@ import { trial_start_screen } from "../instructions/InstrTrial";
 
 import { sizing } from "./sizing";
 
-let { KEYS } = varGlobal;
+let { KEYS } = expInfo;
 
 /**
  * This function creates a main object that will be displayed on the screen.

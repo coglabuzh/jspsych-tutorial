@@ -1,4 +1,4 @@
-import { varGlobal } from "../settings";
+import { expInfo } from "../settings";
 import { jsPsych } from "../jsp";
 
 /**
@@ -6,7 +6,7 @@ import { jsPsych } from "../jsp";
  * @returns true or false; if false, the participant cannot continue
  */
 export const check_consent = function () {
-  if (varGlobal.RUN_JATOS) {
+  if (expInfo.RUN_JATOS) {
     //@ts-ignore
     var resultID = jatos.studyResultId;
     //@ts-ignore

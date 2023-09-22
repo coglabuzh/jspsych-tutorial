@@ -1,19 +1,24 @@
-import { varGlobal } from "../settings";
+
+interface switchObject {
+  RUN_TIMER: boolean;
+}
+
 
 /**
  *
  * @param duration the duration of the countdown timer in seconds
  * @param displayElementId the ID of the HTML element where you want to display the timer
  */
-export function countdownTimer(duration: number, displayElementId) {
+export function countdownTimer(timeSwitch: switchObject, duration: number, displayElementId) {
+  
   // allow to run timer
-  varGlobal.RUN_TIMER = true;
+  timeSwitch.RUN_TIMER = true;
 
   var timer: number = parseInt(String(duration), 10); // Parse duration as an integer
   var minutes, seconds;
 
   var intervalId = setInterval(function () {
-    if (!varGlobal.RUN_TIMER) {
+    if (!timeSwitch.RUN_TIMER) {
       // Check the global variable to see if the timer should be stopped
       clearInterval(intervalId);
       return;
