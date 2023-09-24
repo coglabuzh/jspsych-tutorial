@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 interface blurObject {
   TRACK: boolean;
   MAX_BLUR: number;
-  nBlur: number;
+  nBLUR: number;
 }
 
 /** Contro the browser interactions
@@ -18,7 +18,6 @@ interface blurObject {
  * @param alert A boolean value.
  */
 export function track_interactions(blur: blurObject, alert = true) {
-
   let get_interactions = jsPsych.data.getInteractionData();
   let interaction_data = JSON.parse(get_interactions.json());
   let last_event = interaction_data[interaction_data.length - 1];
@@ -26,9 +25,9 @@ export function track_interactions(blur: blurObject, alert = true) {
   if (blur.TRACK) {
     if (last_event["event"] === "blur") {
       // plus one
-      blur.nBlur++;
+      blur.nBLUR++;
 
-      if (blur.nBlur < blur.MAX_BLUR && blur.nBlur > 0) {
+      if (blur.nBLUR < blur.MAX_BLUR && blur.nBLUR > 0) {
         jsPsych.pauseExperiment();
 
         // show warning information
@@ -36,7 +35,7 @@ export function track_interactions(blur: blurObject, alert = true) {
           Swal.fire({
             icon: "warning",
             title: "Warning",
-            text: `You have left the window tab ${blur.nBlur} time(s).
+            text: `You have left the window tab ${blur.nBLUR} time(s).
                      When you leave it two more times, you will be kicked out of the study.`,
             showConfirmButton: true,
           }).then(() => {
@@ -55,7 +54,6 @@ export function track_interactions(blur: blurObject, alert = true) {
         });
 
         jsPsych.endExperiment();
-
       }
     }
   }

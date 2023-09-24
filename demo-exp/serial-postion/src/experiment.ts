@@ -60,13 +60,13 @@ export async function run({
   // create a list of trials for each condition
   // nExpTrials: number of experiment trials for each condition
   // conditionList: list of setsizes
-  let exp_trials = Array(expInfo.nExpTrials).fill(expInfo.conditionList).flat();
+  let exp_trials = Array(expInfo.nTRIALS).fill(expInfo.CONDITIONS).flat();
 
   // randomize the order of trials (shuffle the list - Fisher-Yates algorithm)
   random.shuffle(exp_trials);
 
   // chunk trials into blocks: divide the experimental list into nBlock chunks
-  const exp_chunks = chunkTrials(exp_trials, expInfo.nBlock);
+  const exp_chunks = chunkTrials(exp_trials, expInfo.nBLOCKS);
 
   /** Step 2: Based on  trial list create the code for displaying the information **/
 
@@ -85,7 +85,7 @@ export async function run({
     for (let [iTrial, setsize] of block_trials.entries()) {
       var trial_line = createNewTrial(
         setsize,
-        expInfo.nBoxes,
+        expInfo.nBOXES,
         "experiment",
         iBlock,
         iTrial
@@ -95,11 +95,11 @@ export async function run({
     }
 
     // Insert a break between the blocks
-    if (iBlock + 1 < expInfo.nBlock) {
+    if (iBlock + 1 < expInfo.nBLOCKS) {
       var break_screen = createBlockBreak(
         iBlock,
-        expInfo.nBlock,
-        expInfo.breakDuration
+        expInfo.nBLOCKS,
+        expInfo.TIMING.BREAK
       );
 
       exp_line.push(break_screen);

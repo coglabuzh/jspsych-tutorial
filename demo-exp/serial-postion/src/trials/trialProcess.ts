@@ -105,7 +105,7 @@ trialStim.prototype.memoryPhase = function () {
 
     // Set the start time and end time for the presentation of the letter at the current position in the "letter_boxes" array.
     letter_boxes[pos + 1].show_start_time = 0;
-    letter_boxes[pos + 1].show_end_time = expInfo.presentationTime;
+    letter_boxes[pos + 1].show_end_time = expInfo.TIMING.STIMULUS;
 
     // Define a new object called "stim_screen" with various properties
     let stim_screen = {
@@ -116,7 +116,7 @@ trialStim.prototype.memoryPhase = function () {
       stimuli: letter_boxes,
       response_type: "key",
       choices: "NO_KEYS",
-      trial_duration: expInfo.ISI + expInfo.presentationTime,
+      trial_duration: expInfo.TIMING.ISI + expInfo.TIMING.STIMULUS,
       data: {
         screenID: "memory",
         expPart: this.expPart,
@@ -168,7 +168,7 @@ trialStim.prototype.retrievalPhase = function () {
       canvas_height: this.canH,
       stimuli: boxes,
       response_type: "key",
-      trial_duration: expInfo.retrievalTime,
+      trial_duration: expInfo.TIMING.RETRIEVAL,
       choices: KEYS.CONTINUE,
       key_down_func: function (event) {
         // get the value of the key that the participant pressed
@@ -261,7 +261,7 @@ trialStim.prototype.retrievalPhase2 = function () {
       canvas_height: this.canH,
       stimuli: boxes,
       response_type: "button",
-      trial_duration: expInfo.retrievalTime,
+      trial_duration: expInfo.TIMING.RETRIEVAL,
       button_choices: alter_array,
       button_html: buttonCSS,
       data: {
@@ -294,7 +294,7 @@ trialStim.prototype.debriefPhase = function () {
 
   var display_screen = {
     type: htmlKeyboardResponse,
-    trial_duration: expInfo.debriefTime,
+    trial_duration: expInfo.TIMING.DEBRIEF,
     stimulus: function () {
       var accuracy = jsPsych.data
         .get()
