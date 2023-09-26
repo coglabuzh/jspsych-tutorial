@@ -11,6 +11,7 @@ export const jsPsych = initJsPsych({
     track_interactions(varSystem, true); // For some weird reason, this function does not work if you write out the name of each variable.
   },
 
+  // Assign a participant ID to the participant at the beginning of the experiment
   on_start: function () {
     jsPsych.data.addProperties({ participant_id: uuidv4() }); // add a unique participant id to the data
   },
