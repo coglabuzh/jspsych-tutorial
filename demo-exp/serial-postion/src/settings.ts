@@ -27,9 +27,11 @@ export const expInfo = {
   // e.g., when participants complete the experiment, or when they fail the attention check
   // you can set them here and use them in the end of the experiment (jsp.ts)
   CODES: {
-    SUCCESS: "success", // the code for a successfull completion of the experiment
+    SUCCESS: "success", // the code for a successfully completion of the experiment
     FAIL: "fail", // the code for the failed experiment
+    // You can specify the codes for different situations here.
   },
+  
   /** The key is case-sensitive and position-sensitive.
    * It is recommended to allow both upper and lower case keys.
    * You can use the `convertCase` function to prevent the issue.

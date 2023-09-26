@@ -3,7 +3,7 @@ import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { countdownTimer } from "../basic-fun/countdownTimer";
 import { convertTime } from "../basic-fun/convertTime";
 import { varSystem, expInfo } from "../settings";
-let { KEYS } = expInfo;
+let { KEYS, TIMING } = expInfo;
 
 export const exp_start_screen = {
   type: htmlButtonResponse,
@@ -33,10 +33,10 @@ export const trial_start_screen = {
     <br>
   </div>`,
   choices: KEYS.START_TRIAL, // The only valid key response is the space bar.
-  trial_duration: expInfo.startDuration, // Time to wait before automatically proceeding with the next trial.
-  post_trial_gap: expInfo.ITI, // forced inter-trial interval after participant's response.
+  trial_duration: TIMING.START, // Time to wait before automatically proceeding with the next trial.
+  post_trial_gap: TIMING.ITI, // forced inter-trial interval after participant's response.
   on_load: function () {
-    let time = convertTime(expInfo.startDuration, "ms", "s");
+    let time = convertTime(TIMING.START, "ms", "s");
     //@ts-ignore
     countdownTimer(varSystem, time, "clock");
   },

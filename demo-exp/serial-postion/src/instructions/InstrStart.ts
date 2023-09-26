@@ -11,7 +11,7 @@ const instr2 = `<div class="main">
 <img src="assets/Images/RetrievalPhase.gif" class="image"></img>
 </div>`;
 
-const loop_trial: any[] = createNewTrial(5, expInfo.nBoxes, "practice", 0, 0);
+const loop_trial: any[] = createNewTrial(5, expInfo.nBOXES, "practice", 0, 0);
 
 const slide_line = {
   type: instructions,

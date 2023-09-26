@@ -4,33 +4,30 @@ import Swal from "sweetalert2";
 interface blurObject {
   TRACK: boolean;
   MAX_BLUR: number;
-  N_BLUR: number;
+  nBLUR: number;
 }
 
 /** Contro the browser interactions
  *
  * This function is used to control the number of blurs and to end the experiment if the user has left the tab too often.
  *
- * If you want to use this function, you have to defined a global variable with the name blur.N_BLUR and varGlobal.max_blur.
+ * If you want to use this function, you have to defined a global variable with the name blur.nBlur and varSystem.MAX_BLUR.
  *
- * @param {blurObject} blur An object that has to include variables of `START_COUNT`, `MAX_BLUR` and `N_BLUR`.
+ * @param {blurObject} blur An object that has to include variables of `START_COUNT`, `MAX_BLUR` and `nBlur`.
  * @param {string} code A string that is used to redirect the participant to the Prolific website.
  * @param alert A boolean value.
  */
-export function track_interactions(
-  blur: blurObject,
-  code: string = "FailedAttention",
-  alert = true
-) {
+export function track_interactions(blur: blurObject, alert = true) {
   let get_interactions = jsPsych.data.getInteractionData();
   let interaction_data = JSON.parse(get_interactions.json());
   let last_event = interaction_data[interaction_data.length - 1];
+
   if (blur.TRACK) {
     if (last_event["event"] === "blur") {
       // plus one
-      blur.N_BLUR++;
+      blur.nBLUR++;
 
-      if (blur.N_BLUR < blur.MAX_BLUR && blur.N_BLUR > 0) {
+      if (blur.nBLUR < blur.MAX_BLUR && blur.nBLUR > 0) {
         jsPsych.pauseExperiment();
 
         // show warning information
@@ -38,7 +35,7 @@ export function track_interactions(
           Swal.fire({
             icon: "warning",
             title: "Warning",
-            text: `You have left the window tab ${blur.N_BLUR} time(s).
+            text: `You have left the window tab ${blur.nBLUR} time(s).
                      When you leave it two more times, you will be kicked out of the study.`,
             showConfirmButton: true,
           }).then(() => {
@@ -57,14 +54,6 @@ export function track_interactions(
         });
 
         jsPsych.endExperiment();
-        //@ts-ignore
-        if (varGlobal.run_jatos)
-          //@ts-ignore
-          jatos.endStudyAndRedirect(
-            `https://app.prolific.co/submissions/complete?cc=${code}`,
-            false,
-            "Failed"
-          );
       }
     }
   }

@@ -11,6 +11,6 @@ export const fullMode_screen = {
   on_finish: function () {
     // start to count that how many times participants has left the browser.
     varSystem.TRACK = true;
-    varSystem.nBlur = 0;
+    varSystem.nBLUR = 0;
   },
 };
