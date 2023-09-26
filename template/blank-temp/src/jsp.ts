@@ -11,6 +11,10 @@ export const jsPsych = initJsPsych({
     track_interactions(varSystem, true); // For some weird reason, this function does not work if you write out the name of each variable.
   },
 
+  on_start: function () {
+    jsPsych.data.addProperties({ participant_id: uuidv4() }); // add a unique participant id to the data
+  },
+
   // append results to JATOS after each trial if the experiment is running on JATOS.
   on_trial_finish: function () {
     if (expInfo.RUN_JATOS) {
@@ -24,7 +28,6 @@ export const jsPsych = initJsPsych({
   on_finish: function (data) {
     varSystem.TRACK = false;
 
-    jsPsych.data.addProperties({ participant_id: uuidv4() }); // add a unique participant id to the data
     // console.log(JSON.stringify(jsPsych.data.get().json()));
 
     // Submit results to JATOS
