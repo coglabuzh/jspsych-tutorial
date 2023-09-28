@@ -1,5 +1,7 @@
-// Import plugins to this file
+// jsPsych official plugins
 import htmlButtonResponse from "@jspsych/plugin-html-button-response";
+
+// Global variables
 import { jsPsych, expInfo } from "../settings";
 
 const download_screen = {

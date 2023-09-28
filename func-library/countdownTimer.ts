@@ -9,7 +9,7 @@ interface switchObject {
  * @param duration the duration of the countdown timer in seconds
  * @param displayElementId the ID of the HTML element where you want to display the timer
  */
-export function countdownTimer(timeSwitch: switchObject, duration: number, displayElementId) {
+export function countDownTimer(timeSwitch: switchObject, duration: number, displayElementId) {
   
   // allow to run timer
   timeSwitch.RUN_TIMER = true;

@@ -1,5 +1,9 @@
-import { jsPsych } from "../jsp";
+// Third party plugins
 import Swal from "sweetalert2";
+
+// Global variables
+import { jsPsych } from "../jsp";
+
 
 interface blurObject {
   TRACK: boolean;
@@ -17,13 +21,13 @@ interface blurObject {
  * @param {string} code A string that is used to redirect the participant to the Prolific website.
  * @param alert A boolean value.
  */
-export function track_interactions(blur: blurObject, alert = true) {
-  let get_interactions = jsPsych.data.getInteractionData();
-  let interaction_data = JSON.parse(get_interactions.json());
-  let last_event = interaction_data[interaction_data.length - 1];
+export function trackInteractions(blur: blurObject, alert = true) {
+  // get the last interaction event
+  let interactionData = JSON.parse(jsPsych.data.getInteractionData().json());
+  let lastEvent = interactionData[interactionData.length - 1];
 
   if (blur.TRACK) {
-    if (last_event["event"] === "blur") {
+    if (lastEvent["event"] === "blur") {
       // plus one
       blur.nBLUR++;
 
