@@ -1,4 +1,4 @@
-// Import plugins to this file
+// jsPsych official plugin
 import htmlButtonResponse from "@jspsych/plugin-html-button-response";
 
 export const welcome_screen = {

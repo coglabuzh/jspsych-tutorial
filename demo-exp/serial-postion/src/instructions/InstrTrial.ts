@@ -1,9 +1,15 @@
+// jsPsych official plugin
 import htmlButtonResponse from "@jspsych/plugin-html-button-response";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
-import { countdownTimer } from "../basic-fun/countdownTimer";
+
+// Basic Functions
+import { countDownTimer } from "../basic-fun/countdownTimer";
 import { convertTime } from "../basic-fun/convertTime";
+
+// Global variables
 import { varSystem, expInfo } from "../settings";
 let { KEYS, TIMING } = expInfo;
+
 
 export const exp_start_screen = {
   type: htmlButtonResponse,
@@ -38,7 +44,7 @@ export const trial_start_screen = {
   on_load: function () {
     let time = convertTime(TIMING.START, "ms", "s");
     //@ts-ignore
-    countdownTimer(varSystem, time, "clock");
+    countDownTimer(varSystem, time, "clock");
   },
   on_finish: function () {
     varSystem.RUN_TIMER = false;
@@ -74,7 +80,7 @@ export function createBlockBreak(
     post_trial_gap: 1000,
     on_load: function () {
       // @ts-ignore
-      countdownTimer(convertTime(duration, "s", "ms"), "blockClock");
+      countDownTimer(convertTime(duration, "s", "ms"), "blockClock");
     },
     on_finish: function () {
       varSystem.RUN_TIMER = false;

@@ -1,6 +1,14 @@
+/**
+ * This file contains the settings for the experiment.
+ */
+
+// Basic Functions
 import { convertCase } from "./basic-fun/convertCase";
-import { sequence } from "./basic-fun/sequence";
+import { generateArray } from "./basic-fun/sequence";
+
+// Task functions
 import { setCSS } from "./task-fun/setCSS";
+
 
 setCSS();
 
@@ -40,13 +48,20 @@ export const expInfo = {
    */
   KEYS: {
     CONTINUE: ["enter"],
-    ALLOW_KEYS: convertCase(sequence.alphabet(false)), // Both lower case letters and upper case letters are allowed.
+    ALLOW_KEYS: convertCase(generateArray.alphabet(false)), // Both lower case letters and upper case letters are allowed.
     START_TRIAL: [" "],
   },
 
   // If you want to use the keyCode rather than key name,
   // you can go to the following link to get the key code:
   // https://www.toptal.com/developers/keycode/
+
+  // The size of the elements in canvas
+  SIZE: {
+    WIDTH_ADJUSTMENT: 0.9, // Set the width of the canvas as 90% of the window's width.
+    STIM_RADIUS: 0.33, // The radius of the box circle.
+    BOX_WIDTH: 0.175, // The width of the box.
+},
 
   // Running environment variables
   RUN_JATOS: false, // a switch to run the experiment on JATOS

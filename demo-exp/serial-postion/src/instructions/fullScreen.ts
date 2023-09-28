@@ -1,5 +1,9 @@
+// jsPsych official plugin
 import fullscreen from "@jspsych/plugin-fullscreen";
+
+// Global variables
 import { varSystem } from "../settings";
+
 
 // Switch to fullscreen
 export const fullMode_screen = {

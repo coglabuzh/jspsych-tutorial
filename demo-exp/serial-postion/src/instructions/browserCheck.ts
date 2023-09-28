@@ -1,3 +1,4 @@
+// jsPsych official plugin
 import browserCheck from "@jspsych/plugin-browser-check";
 
 // checking the size of window

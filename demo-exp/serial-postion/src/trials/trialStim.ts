@@ -1,5 +1,6 @@
+// Basic functions
 import { random } from "../basic-fun/random";
-import { sequence } from "../basic-fun/sequence";
+import { generateArray } from "../basic-fun/sequence";
 
 /**
  * Generates a stimulus array based on the specified condition.
@@ -16,7 +17,7 @@ export const generateStims = function (
   var stim_pool: string[] = [];
 
   // Create an array of the English alphabet.
-  if (stim == "letter") var stim_pool = sequence.alphabet();
+  if (stim == "letter") var stim_pool = generateArray.alphabet();
   if (stim == "image") {
     for (let i = 1; i < 12; i++) {
       stim_pool.push(`assets/images/stimuli/Image${i}.jpg`);

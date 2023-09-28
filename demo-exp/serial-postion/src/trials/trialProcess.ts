@@ -1,24 +1,32 @@
+
+// jsPsych official plugin
+import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
+
+// Third party plugins
 import psychophysics from "../basic-fun/Psychophysics";
+
+// Basic Functions
 import { random } from "../basic-fun/random";
 import { getIndex } from "../basic-fun/getIndex";
 import { createButtonMatrix } from "../task-fun/setCSS";
+import { generateArray } from "../basic-fun/sequence";
 
+// Functions for generating stimuli and creating elements
 import { generateStims } from "./trialStim";
 import { stimBoxes } from "./elements";
 
-import { expInfo } from "../settings";
+// Global variables
 import { jsPsych } from "../jsp";
-import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
-import { sequence } from "../basic-fun/sequence";
+import { expInfo } from "../settings";
+let { KEYS,SIZE } = expInfo;
+
+// screens
 import { trial_start_screen } from "../instructions/InstrTrial";
 
-import { sizing } from "./sizing";
-
-let { KEYS } = expInfo;
 
 /**
  * This function creates a main object that will be displayed on the screen.
- * @param {number} setsoue The set-size.
+ * @param {number} setsize The set-size.
  * @param {number} nBox The number of item boxes to generate.
  * @param {string} expPart The name of the experiment part (e.g. "practice" or "experiment").
  * @param {number} blockID The number of the current block
@@ -57,31 +65,31 @@ class trialStim {
 
     // These variables define the size and position of the stimuli object on the screen.
     this.canW =
-      Math.min(screen.width, (screen.height / 9) * 16) * sizing.widthAdapt;
+      Math.min(screen.width, (screen.height / 9) * 16) * SIZE.WIDTH_ADJUSTMENT;
     this.canH = this.canW * 0.5;
     this.center = [this.canW / 2, this.canH / 2];
-    this.radius = this.canH * sizing.stimRadius;
-    this.width = this.canH * sizing.stimWidth;
+    this.radius = this.canH * SIZE.STIM_RADIUS;
+    this.width = this.canH * SIZE.BOX_WIDTH;
   }
 
   // A function used to display items in sequence.
-  memoryPhase() {}
+  displayMemoryPhase() {}
 
   // Ask participants to recall the items.
-  retrievalPhase() {}
+  displayRetrievalPhase() {}
 
   // Ask participants to select correct option from the alternative matrix.
-  retrievalPhase2() {}
+  displayRetrievalPhase2() {}
 
   // return a feedback screen to participants.
-  debriefPhase() {}
+  displayDebriefPhase() {}
 }
 
 /** A function used to display items in sequence.
  *
  * @returns {Object} An object containing the screens to be presented.
  */
-trialStim.prototype.memoryPhase = function () {
+trialStim.prototype.displayMemoryPhase = function () {
   // Create an empty array called "phase_screens" to store the screens that will be presented.
   var phase_line: any[] = [];
 
@@ -141,7 +149,7 @@ trialStim.prototype.memoryPhase = function () {
  *
  * @returns {Object} An object containing the screens to be presented.
  */
-trialStim.prototype.retrievalPhase = function () {
+trialStim.prototype.displayRetrievalPhase = function () {
   // updated these positions
   var phase_line: any[] = [];
 
@@ -217,9 +225,9 @@ trialStim.prototype.retrievalPhase = function () {
  * We utilized the `on_finish` function to convert it into an item.
  *
  */
-trialStim.prototype.retrievalPhase2 = function () {
+trialStim.prototype.displayRetrievalPhase2 = function () {
   // prepare for the alternative matrix
-  const alpha_array = sequence.alphabet(true);
+  const alpha_array = generateArray.alphabet(true);
   const NPL_pool = alpha_array.filter(
     (element) => !this.stim.includes(element)
   );
@@ -288,7 +296,7 @@ trialStim.prototype.retrievalPhase2 = function () {
 };
 
 /* debrief */
-trialStim.prototype.debriefPhase = function () {
+trialStim.prototype.displayDebriefPhase = function () {
   var ret_list = getIndex(this.stim, "#", false);
   var nTest = ret_list.length;
 
@@ -338,13 +346,13 @@ export function createNewTrial(
   // preparation screen
   trial_line.push(trial_start_screen);
   // first memory phase
-  var memory_phase = trial_body.memoryPhase();
+  var memory_phase = trial_body.displayMemoryPhase();
   trial_line = trial_line.concat(memory_phase);
   // retrieval phase
-  var retrieval_phase = trial_body.retrievalPhase();
+  var retrieval_phase = trial_body.displayRetrievalPhase();
   trial_line = trial_line.concat(retrieval_phase);
   // debrief phase
-  var debrief_phase = trial_body.debriefPhase();
+  var debrief_phase = trial_body.displayDebriefPhase();
 
   trial_line.push(debrief_phase);
   // return

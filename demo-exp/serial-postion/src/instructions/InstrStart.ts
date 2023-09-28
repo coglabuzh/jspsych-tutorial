@@ -1,7 +1,13 @@
+// jsPsych official plugin
+import instructions from "@jspsych/plugin-instructions";
+
+// Functions for creating new trials
+import { createNewTrial } from "../trials/trialProcess";
+
+// Global variables
 import { expInfo } from "../settings";
 import { jsPsych } from "../jsp";
-import instructions from "@jspsych/plugin-instructions";
-import { createNewTrial } from "../trials/trialProcess";
+
 
 const instr1 = `<div class="main">
 <img src="assets/Images/MemoryPhase.gif" class="image"></img>

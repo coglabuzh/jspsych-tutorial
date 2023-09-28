@@ -1,31 +1,40 @@
 /**
  * @title Serial position recall task
  * @description This is a demo experiment based on the position recall task.
- * @version 0.1.1
+ * @author Chenyu Li and Hannah (Dames) Tschannen
+ * @version 0.2.0
+ * 
  *
  * @assets assets/
  */
 
+
 // import stylesheets (.scss or .css).
 import "../styles/main.scss";
 
-// import plugins from jspsych
+// jsPsych official plugin
 import preload from "@jspsych/plugin-preload";
 
-// import setting
+// Basic Functions
+import { random } from "./basic-fun/random";
+import { chunkTrials } from "./basic-fun/chunkTrials";
+
+// Functions for creating new trials
+import { createNewTrial } from "./trials/trialProcess";
+
+// Global variables
 import { expInfo } from "./settings";
 import { jsPsych } from "./jsp";
 
-// import custom functions and screens
+// screens
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { browser_screen } from "./instructions/browserCheck";
 import { exp_start_screen, createBlockBreak } from "./instructions/InstrTrial";
-import { random } from "./basic-fun/random";
-import { chunkTrials } from "./basic-fun/chunkTrials";
-import { createNewTrial } from "./trials/trialProcess";
 import { createInstr } from "./instructions/InstrStart";
+
+
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
