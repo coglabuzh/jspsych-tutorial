@@ -16,6 +16,9 @@
     "@jspsych/plugin-preload": "^1.1.2",
     "jspsych": "^7.3.1",
     "jss-browserify": "^0.6.0",
+    "ml-matrix": "^6.10.4",
+    "numeric": "^1.2.6",
+    "pixi.js": "^7.2.4",
     "sweetalert2": "^11.6.13"
   },
   "devDependencies": {

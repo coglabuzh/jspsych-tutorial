@@ -1,5 +1,5 @@
 import { convertCase } from "./basic-fun/convertCase";
-import { sequence } from "./basic-fun/sequence";
+import { generateArray } from "./basic-fun/sequence";
 import { setCSS } from "./task-fun/setCSS";
 
 setCSS();
@@ -39,7 +39,7 @@ export const expInfo = {
    */
   KEYS: {
     CONTINUE: ["enter"],
-    ALLOW_KEYS: convertCase(sequence.alphabet(false)), // Both lower case letters and upper case letters are allowed.
+    ALLOW_KEYS: convertCase(generateArray.alphabet(false)), // Both lower case letters and upper case letters are allowed.
     START_TRIAL: [" "],
   },
 

@@ -1,14 +1,20 @@
-import { track_interactions } from "./basic-fun/attentionCheck";
-import { varSystem, expInfo } from "./settings";
+// jsPsych official plugin
+import { initJsPsych } from "jspsych";
+
+// Third party plugins
 import { v4 as uuidv4 } from "uuid";
 
-// Initialize JsPsych
-import { initJsPsych } from "jspsych";
+// Basic Functions
+import { trackInteractions } from "./basic-fun/attentionCheck";
+
+// Global variables
+import { varSystem, expInfo } from "./settings";
+
 
 export const jsPsych = initJsPsych({
   // check whether participants leave the window or not during the experiment
   on_interaction_data_update: function () {
-    track_interactions(varSystem, true); // For some weird reason, this function does not work if you write out the name of each variable.
+    trackInteractions(varSystem, true); // For some weird reason, this function does not work if you write out the name of each variable.
   },
 
   on_start: function () {

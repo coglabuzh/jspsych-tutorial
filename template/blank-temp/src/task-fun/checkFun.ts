@@ -1,3 +1,4 @@
+// Global variables
 import { expInfo } from "../settings";
 import { jsPsych } from "../jsp";
 
@@ -5,7 +6,7 @@ import { jsPsych } from "../jsp";
  * Check if the participant agree with all the items in the consent and input their participant ID.
  * @returns true or false; if false, the participant cannot continue
  */
-export const check_consent = function () {
+export const checkConsent = function () {
   if (expInfo.RUN_JATOS) {
     //@ts-ignore
     var resultID = jatos.studyResultId;
@@ -48,7 +49,7 @@ export const check_consent = function () {
  * Check if the participant agree with all the items in the notice.
  * @returns true or false; if false, the participant cannot continue
  */
-export const check_notice = function () {
+export const checkNotice = function () {
   if (
     //@ts-ignore
     document.getElementById("checkbox5").checked

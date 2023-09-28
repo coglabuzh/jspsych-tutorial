@@ -9,13 +9,13 @@
 // import stylesheets (.scss or .css).
 import "../styles/main.scss";
 
-// import plugins from jspsych
+// jsPsych official plugin
 import preload from "@jspsych/plugin-preload";
 
-// import setting
+// Global variables
 import { jsPsych } from "./jsp";
 
-// import custom functions and screens
+// screens
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";

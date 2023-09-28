@@ -1,4 +1,5 @@
-import instructions from "@jspsych/plugin-instructions"
+// jsPsych official plugin
+import instructions from "@jspsych/plugin-instructions";
 
 
 const instr1 = `<div class="main">

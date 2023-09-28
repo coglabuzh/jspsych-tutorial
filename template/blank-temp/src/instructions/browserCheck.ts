@@ -1,6 +1,5 @@
-
-
-import browserCheck from '@jspsych/plugin-browser-check';
+// jsPsych official plugin
+import browserCheck from "@jspsych/plugin-browser-check";
 
 // checking the size of window
 export const browser_screen = {
