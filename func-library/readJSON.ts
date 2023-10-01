@@ -2,7 +2,7 @@
  * 
  * @param path{string} The path to the JSON file
  */
-function fetchAndParseJSON(path: string) {
+export function fetchAndParseJSON(path: string) {
     fetch(path)
         .then(response => {
             if (!response.ok) {
