@@ -3,7 +3,7 @@
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 
 // Third party plugins
-import psychophysics from "../basic-fun/Psychophysics";
+import psychophysics from "@kurokida/jspsych-psychophysics";
 
 // Basic Functions
 import { random } from "../basic-fun/random";
