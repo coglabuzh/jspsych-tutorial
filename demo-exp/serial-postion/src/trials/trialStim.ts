@@ -1,7 +1,6 @@
 // Basic functions
-import { random } from "../basic-fun/random";
-import { generateArray } from "../basic-fun/sequence";
-
+import { random } from "@coglabuzh/webpsy.js";
+import { expInfo } from "../settings";
 /**
  * Generates a stimulus array based on the specified condition.
  * @param {number} [setsize=6] - The number of stimuli to generate (default is 6).
@@ -12,24 +11,17 @@ import { generateArray } from "../basic-fun/sequence";
 export const generateStims = function (
   setsize: number = 6,
   nBox: number = 8,
-  stim = "letter"
 ) {
   var stim_pool: string[] = [];
 
-  // Create an array of the English alphabet.
-  if (stim == "letter") var stim_pool = generateArray.alphabet();
-  if (stim == "image") {
-    for (let i = 1; i < 12; i++) {
-      stim_pool.push(`assets/images/stimuli/Image${i}.jpg`);
-    }
-  }
+  // Create an stimulus pool
+  stim_pool = expInfo.DESIGN.STIM.slice();
 
   // Sample setsize random elements from alphabet_array and store them in stim_array.
   var stim_array = random.sample(stim_pool, nBox);
 
-  // If the "keeping6" condition is specified, replace two items in the initial five positions with the "#" character.
+  // If the setsize is less than 8, replace the remaining elements with the "#" character.
   if (setsize < 8) {
-    // Randomly select 2 positions from the first 5 positions of stim_array and store them in hashPosList.
     var hashPosList = random.sample(
       Array.from(Array(nBox).keys()),
       nBox - setsize

@@ -3,53 +3,36 @@ import htmlButtonResponse from "@jspsych/plugin-html-button-response";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 
 // Basic Functions
-import { countDownTimer } from "../basic-fun/countdownTimer";
-import { convertTime } from "../basic-fun/convertTime";
+import { countDownTimer, convertTime } from "@coglabuzh/webpsy.js";
 
 // Global variables
 import { varSystem, expInfo } from "../settings";
-let { KEYS, TIMING } = expInfo;
+let { TIMING } = expInfo;
+import { TEXT } from "../task-fun/text";
+import { jsPsych } from "../jsp";
 
-
-export const exp_start_screen = {
-  type: htmlButtonResponse,
-  stimulus: `<div class='main'>
-        <h1 class='title'>Experiment</h1>
-        <p class='fb-text'>Good job! Now we will start running the experiment. </p>
-      </div>`,
-  choices: ["Continue"],
-};
-
-export const pra_instr_screen = {
-  type: htmlButtonResponse,
-  stimulus: `<div class='main'>
-        <h1 class='title'>Practice</h1>
-        <p class='fb-text'>We will do some practice to get familiar with the experiment</p>
-      </div>`,
-  choices: ["Continue"],
-};
 
 // display a cue screen with a countdown timer.
 export const trial_start_screen = {
   type: htmlKeyboardResponse,
-  stimulus: `<div class="fb-text">
-    <p>The next trial will start in <span id="clock" style="color:red">10</span> seconds.</p>
-    <p>Press the "Space bar" to start directly.</p>
+  stimulus: function(){
+    return `<div class="fb-text">
+    ${TEXT.startTrial[expInfo.LANG]}
     <br>
     <br>
-  </div>`,
-  choices: KEYS.START_TRIAL, // The only valid key response is the space bar.
+  </div>`;
+  },
+  choices: [" "], // The only valid key response is the space bar.
   trial_duration: TIMING.START, // Time to wait before automatically proceeding with the next trial.
-  post_trial_gap: TIMING.ITI, // forced inter-trial interval after participant's response.
+  post_trial_gap: 1000, // forced inter-trial interval after participant's response.
   on_load: function () {
     let time = convertTime(TIMING.START, "ms", "s");
     //@ts-ignore
-    countDownTimer(varSystem, time, "clock");
+    countDownTimer(time, "clock", jsPsych);
   },
-  on_finish: function () {
-    varSystem.RUN_TIMER = false;
-  },
+  on_finish: function () {},
 };
+
 
 /**  create a block break screen
  * @param {number} block - the current block

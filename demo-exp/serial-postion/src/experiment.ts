@@ -16,8 +16,7 @@ import "../styles/main.scss";
 import preload from "@jspsych/plugin-preload";
 
 // Basic Functions
-import { random } from "./basic-fun/random";
-import { chunkTrials } from "./basic-fun/chunkTrials";
+import { random, chunkTrials } from "@coglabuzh/webpsy.js";
 
 // Functions for creating new trials
 import { createNewTrial } from "./trials/trialProcess";
@@ -25,14 +24,15 @@ import { createNewTrial } from "./trials/trialProcess";
 // Global variables
 import { expInfo } from "./settings";
 import { jsPsych } from "./jsp";
+let {DESIGN, TIMING} = expInfo;
 
 // screens
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { browser_screen } from "./instructions/browserCheck";
-import { exp_start_screen, createBlockBreak } from "./instructions/InstrTrial";
-import { createInstr } from "./instructions/InstrStart";
+import { createBlockBreak } from "./instructions/InstrTrial";
+import { createInstr, exp_start_screen } from "./instructions/InstrStart";
 
 
 
@@ -69,13 +69,13 @@ export async function run({
   // create a list of trials for each condition
   // nExpTrials: number of experiment trials for each condition
   // conditionList: list of setsizes
-  let exp_trials = Array(expInfo.nTRIALS).fill(expInfo.CONDITIONS).flat();
+  let exp_trials = Array(DESIGN.nTRIALS).fill(DESIGN.CONDITIONS).flat();
 
   // randomize the order of trials (shuffle the list - Fisher-Yates algorithm)
   random.shuffle(exp_trials);
 
   // chunk trials into blocks: divide the experimental list into nBlock chunks
-  const exp_chunks = chunkTrials(exp_trials, expInfo.nBLOCKS);
+  const exp_chunks = chunkTrials(exp_trials, DESIGN.nBLOCKS);
 
   /** Step 2: Based on  trial list create the code for displaying the information **/
 
@@ -94,7 +94,7 @@ export async function run({
     for (let [iTrial, setsize] of block_trials.entries()) {
       var trial_line = createNewTrial(
         setsize,
-        expInfo.nBOXES,
+        DESIGN.nBOXES,
         "experiment",
         iBlock,
         iTrial
@@ -104,11 +104,11 @@ export async function run({
     }
 
     // Insert a break between the blocks
-    if (iBlock + 1 < expInfo.nBLOCKS) {
+    if (iBlock + 1 < DESIGN.nBLOCKS) {
       var break_screen = createBlockBreak(
         iBlock,
-        expInfo.nBLOCKS,
-        expInfo.TIMING.BREAK
+        DESIGN.nBLOCKS,
+        TIMING.BREAK
       );
 
       exp_line.push(break_screen);
@@ -116,9 +116,6 @@ export async function run({
   }
 
   /************************************** Procedure **************************************/
-
-  // TODO HANNAH: alters participant if they try to resize the window
-  // addEventListener("resize", (event) => { alert("don't resize")});
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want

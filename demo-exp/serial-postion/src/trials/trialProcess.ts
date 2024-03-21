@@ -6,10 +6,8 @@ import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import psychophysics from "@kurokida/jspsych-psychophysics";
 
 // Basic Functions
-import { random } from "../basic-fun/random";
-import { getIndex } from "../basic-fun/getIndex";
 import { createButtonMatrix } from "../task-fun/setCSS";
-import { generateArray } from "../basic-fun/sequence";
+import { random, getIndex, generateArray } from "@coglabuzh/webpsy.js";
 
 // Functions for generating stimuli and creating elements
 import { generateStims } from "./trialStim";
@@ -19,6 +17,7 @@ import { stimBoxes } from "./elements";
 import { jsPsych } from "../jsp";
 import { expInfo } from "../settings";
 let { KEYS,SIZE } = expInfo;
+import { TEXT } from "../task-fun/text";
 
 // screens
 import { trial_start_screen } from "../instructions/InstrTrial";
@@ -309,7 +308,7 @@ trialStim.prototype.displayDebriefPhase = function () {
         .last(nTest + 1)
         .filter({ screenID: "retrieval", acc: true })
         .count();
-      return `<div class='fb-text'>You correctly recalled ${accuracy} out of ${nTest} letters.</div>`;
+      return TEXT.feedback(accuracy, nTest, expInfo.LANG);
     },
     choices: "NO_KEYS",
     data: {
@@ -349,7 +348,7 @@ export function createNewTrial(
   var memory_phase = trial_body.displayMemoryPhase();
   trial_line = trial_line.concat(memory_phase);
   // retrieval phase
-  var retrieval_phase = trial_body.displayRetrievalPhase();
+  var retrieval_phase = trial_body.displayRetrievalPhase2();
   trial_line = trial_line.concat(retrieval_phase);
   // debrief phase
   var debrief_phase = trial_body.displayDebriefPhase();

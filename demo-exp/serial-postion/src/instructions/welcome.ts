@@ -1,14 +1,15 @@
 // jsPsych official plugin
 import htmlButtonResponse from "@jspsych/plugin-html-button-response";
+import { TEXT } from "../task-fun/text";
+import { expInfo } from "../settings";
 
 export const welcome_screen = {
   type: htmlButtonResponse,
-  stimulus: `<p class="title">Welcome!</p>
-      <div class="main">
-        <p class="fb-text">
-          Thank you very much for participating in this experiment.
-        </p>
-      </div>`,
-  choices: ["&nbsp;Continue&nbsp;"],
+  stimulus: function () {
+    return TEXT.welcome[expInfo.LANG];
+  },
+  choices: function () {
+    return TEXT.continueButton[expInfo.LANG];
+  },
   data: { screen_id: "welcome" },
 };

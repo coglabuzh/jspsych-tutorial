@@ -1,5 +1,9 @@
 // jsPsych official plugin
 import instructions from "@jspsych/plugin-instructions";
+import htmlButtonResponse from "@jspsych/plugin-html-button-response";
+
+// Global variables
+import { TEXT } from "../task-fun/text";
 
 // Functions for creating new trials
 import { createNewTrial } from "../trials/trialProcess";
@@ -9,20 +13,30 @@ import { expInfo } from "../settings";
 import { jsPsych } from "../jsp";
 
 
-const instr1 = `<div class="main">
-<img src="assets/Images/MemoryPhase.gif" class="image"></img>
-</div>`;
 
-const instr2 = `<div class="main">
-<img src="assets/Images/RetrievalPhase.gif" class="image"></img>
-</div>`;
 
-const loop_trial: any[] = createNewTrial(5, expInfo.nBOXES, "practice", 0, 0);
+const loop_trial: any[] = createNewTrial(5, expInfo.DESIGN.nBOXES, "practice", 0, 0);
 
 const slide_line = {
   type: instructions,
-  pages: [instr1, instr2],
+  pages: function () {
+    const instr1 = `<div class="main">
+    <img src="assets/images/instruction-${expInfo.LANG}/MemoryPhase.gif" class="image"></img>
+    </div>`;
+
+    const instr2 = `<div class="main">
+    <img src="assets/images/instruction-${expInfo.LANG}/RetrievalPhase.gif" class="image"></img>
+    </div>`;
+
+    return [instr1, instr2];
+  },
   show_clickable_nav: true,
+  button_label_previous: function () {
+    return TEXT.prevButton[expInfo.LANG];
+  },
+  button_label_next: function () {
+    return TEXT.nextButton[expInfo.LANG];
+  },
   data: { screenID: "instruction" },
 };
 
@@ -66,3 +80,23 @@ export function createInstr(
 
   return instr_line;
 }
+
+export const exp_start_screen = {
+  type: htmlButtonResponse,
+  stimulus: function () {
+    return TEXT.startExperiment[expInfo.LANG];
+  },
+  choices: function () {
+    return TEXT.continueButton[expInfo.LANG];
+  },
+};
+
+export const pra_instr_screen = {
+  type: htmlButtonResponse,
+  stimulus: function () {
+    return TEXT.startPractice[expInfo.LANG];
+  },
+  choices: function () {
+    return TEXT.continueButton[expInfo.LANG];
+  },
+};

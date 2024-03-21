@@ -3,8 +3,7 @@
  */
 
 // Basic Functions
-import { convertCase } from "./basic-fun/convertCase";
-import { generateArray } from "./basic-fun/sequence";
+import { convertCase, generateArray } from "@coglabuzh/webpsy.js";
 
 // Task functions
 import { setCSS } from "./task-fun/setCSS";
@@ -15,10 +14,21 @@ setCSS();
 export const expInfo = {
   // settings for the experiment
   TITLE: "serial_position",
-  nTRIALS: 1, // number of experiment trials for each condition
-  nBLOCKS: 1, // number of blocks
-  nBOXES: 8, // number of boxes
-  CONDITIONS: [5, 6, 7, 8],
+  
+  LANG: "en", // the default language of the experiment
+
+  DESIGN: {
+    STIM: [
+      "A", "B", "C", "D", "E", "F", "G", 
+      "H", "I", "J", "K", "L", "M", "N", 
+      "O", "P", "Q", "R", "S", "T", "U",
+      "V", "W", "X", "Y", "Z"
+    ],
+    nTRIALS: 1, // number of experiment trials for each condition
+    nBLOCKS: 1, // number of blocks
+    nBOXES: 8, // number of boxes
+    CONDITIONS: [5, 6, 7, 8],
+  },
 
   // settings for each trial
   TIMING: {
@@ -36,6 +46,7 @@ export const expInfo = {
   // you can set them here and use them in the end of the experiment (jsp.ts)
   CODES: {
     SUCCESS: "success", // the code for a successfully completion of the experiment
+    OFFLINE: "offline", // the code for the offline situation
     FAIL: "fail", // the code for the failed experiment
     // You can specify the codes for different situations here.
   },

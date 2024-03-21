@@ -1,93 +1,95 @@
 // jsPsych official plugin
 import { initJsPsych } from "jspsych";
 
-// Third party plugins
-import { v4 as uuidv4 } from "uuid";
-
 // Basic Functions
-import { trackInteractions } from "./basic-fun/attentionCheck";
-
+import { trackInteractions } from "@coglabuzh/webpsy.js";
 // Global variables
 import { varSystem, expInfo } from "./settings";
+let { RUN_JATOS } = expInfo;
+import { TEXT } from "./task-fun/text";
 
+// Task functions
+import { setCSS } from "./task-fun/setCSS";
 
-// Initialize JsPsych
+// Do something in the beginning of the experiment
+setCSS(); // set the CSS style of the experiment
+
+// Set for the condition in which the data fails to be uploaded to JATOS
+if (RUN_JATOS) {
+  //@ts-ignore
+  jatos.httpRetry = 10; // attempts 10 retries of failed requests
+  //@ts-ignore
+  jatos.httpRetryWait = 5000; // sets retry waiting time to 5 seconds
+}
+
 export const jsPsych = initJsPsych({
   // check whether participants leave the window or not during the experiment
   on_interaction_data_update: function () {
-    trackInteractions(varSystem, true); // For some weird reason, this function does not work if you write out the name of each variable.
-  },
-
-  // Assign a participant ID to the participant at the beginning of the experiment
-  on_start: function () {
-    jsPsych.data.addProperties({ participant_id: uuidv4() }); // add a unique participant id to the data
-  },
-
-  // append results to JATOS after each trial if the experiment is running on JATOS.
-  on_trial_finish: function () {
-    if (expInfo.RUN_JATOS) {
-      var resultJson = jsPsych.data.getLastTrialData().json();
-      //@ts-ignore
-      jatos.appendResultData(resultJson);
-    }
+    trackInteractions(varSystem, true, jsPsych);
   },
 
   // after the whole experiment, do the following things
   on_finish: function (data) {
+    // stop tracking interactions
     varSystem.TRACK = false;
 
-    // console.log(JSON.stringify(jsPsych.data.get().json()));
-
-    // Submit results to JATOS
+    // get the data
     var resultJson = jsPsych.data.get().json();
 
-    if (expInfo.RUN_JATOS) {
-      //@ts-ignore
-      jatos.submitResultData(resultJson); // submit results to JATOS
-      //prolific integration
-      if (!varSystem.FAILED_ATTENTION_CHECK) {
-        // if participants did not fail the attention check redirect them to prolific with a success token
-        document.body.innerHTML =
-          "<p> Please wait. You are redirected to Prolific to book your credit.</p>";
-        setTimeout(function () {
-          //@ts-ignore
-          jatos.endStudyAndRedirect(
-            `https://app.prolific.co/submissions/complete?cc=${expInfo.CODES.SUCCESS}`,
-            true,
-            "Completed"
-          );
-        }, 10000);
-      } else if (varSystem.FAILED_ATTENTION_CHECK) {
-        //if participants failed the attention check redirect them to prolific with a failure token
-        document.body.innerHTML =
-          "<p> Customized text: oh, no you failed an attention check! </p>";
-        setTimeout(function () {
-          //@ts-ignore
-          jatos.endStudyAndRedirect(
-            `https://app.prolific.co/submissions/complete?cc=${expInfo.CODES.FAIL}`,
-            false,
-            "Failed"
-          );
-        }, 10000);
-      }
-    } else {
-      //when not running on JATOS, download the data as a csv or json file
-      //jsPsych.data.displayData();
+    // check the status of participants
+    let internet = RUN_JATOS && navigator.onLine ? "online" : "offline";
+    let results = varSystem.FAILED_ATTENTION_CHECK ? "fail" : "success";
+    let finalStatus = `${internet}_${results}`;
 
-      const participant_id = jsPsych.data
-        .getLastTrialData()
-        .values()[0].participant;
-      var file_name = expInfo.TITLE + "_" + participant_id + ".json";
-      jsPsych.data.get().localSave("json", file_name);
+    // return varied completion codes and screen based on the final status
+    switch (finalStatus) {
+      // when the participants run the experiment online and pass the attention check
+      case "online_success":
+        //@ts-ignore submit results to JATOS
+        jatos
+          .submitResultData(resultJson)
+          //@ts-ignore end the study
+          .then(jatos.endStudyAjax(true, "FINISHED"))
+          .then(() => {
+            // window.location.href = `assets/external-html/completed-${expInfo.LANG}.html`;
+            document.body.innerHTML = TEXT.completedOffline[expInfo.LANG];
+          })
+          .catch((error) => {
+            console.error("Failed to submit the results to JATOS", error);
+          });
+        break;
 
-      document.body.innerHTML = `<div class="main">
-      <h1 class="title">Good job!</h1>
-      <p class='body-center'>
-        You have successfully completed this experiment.
-        The data is automatically downloaded and can be found in your download folder.
-        You can close this window now.
-      </p>
-      </div>`;
+      // when the participants fail the attention check reagardless of the internet status
+      case "online_fail":
+        //@ts-ignore submit results to JATOS
+        jatos
+          .submitResultData(resultJson)
+          //@ts-ignore end the study
+          .then(jatos.endStudyAjax(false, "FAILED_ATTENTION_CHECK"))
+          .then(() => {
+            // window.location.href = `assets/external-html/failed-${expInfo.LANG}.html`;
+            document.body.innerHTML = TEXT.failedOnline[expInfo.LANG];
+          })
+          .catch((error) => {
+            console.error("Failed to submit the results to JATOS", error);
+          });
+        break;
+
+      case "offline_fail":
+        document.body.innerHTML = TEXT.failedOffline[expInfo.LANG];
+
+        break;
+      case "offline_success":
+        // download the data as a json file
+        const participant_id = jsPsych.data
+          .getLastTrialData()
+          .values()[0].participant;
+        var file_name = expInfo.TITLE + "_" + participant_id + ".json";
+        jsPsych.data.get().localSave("json", file_name);
+
+        document.body.innerHTML = TEXT.completedOffline[expInfo.LANG];
+
+        break;
     }
   },
 });
