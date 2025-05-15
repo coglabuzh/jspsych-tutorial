@@ -20,6 +20,8 @@ import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
 
+console.log("Hello world!");
+
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
  *

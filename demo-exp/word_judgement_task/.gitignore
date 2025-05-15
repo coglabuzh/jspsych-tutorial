@@ -1,0 +1,19 @@
+.DS_Store
+__pycache__/
+.vscode/
+.log
+.jspsych-builder/
+~$*
+*.tmp
+node_modules/
+packaged/
+
+# Word temporary
+~$*.doc*
+
+# Excel temporary
+~$*.xls*
+
+# PowerPoint temporary
+~$*.ppt*
+*.jzip
