@@ -44,13 +44,7 @@ export function createNewTrial(XY: number, isPractice: boolean, animacy: number,
     data: {
       trial_number: XY,
       animacy: animacy,
-      procedure: function (data) {
-        if (isPractice) {
-          return "practice";
-        } else {
-          return "experiment";
-        }
-      },
+      procedure: isPractice ? "practice" : "test",
       stimulus: targetStim,
     },
     on_finish: function (data) {
